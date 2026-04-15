@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoStock Shield</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* ================= PREMIUM BACKGROUND ================= */
+        .gradient-bg {
+            background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15), transparent),
+                radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.15), transparent);
+        }
+
+        /* ================= GLASS ================= */
+        .glass {
+            backdrop-filter: blur(12px);
+            background: rgba(31, 41, 55, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .glass:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ================= FADE ANIMATION ================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= FLOATING CARD ================= */
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ================= BUTTON GLOW ================= */
+        .glow:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+        }
+
+        /* ================= PULSE ================= */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ADDED */
+        .live-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseLive 1.5s infinite;
+        }
+
+        @keyframes pulseLive {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* ADDED */
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(59, 130, 246, 0.5);
+            animation: scanMove 3s linear infinite;
+        }
+
+        @keyframes scanMove {
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        /* NEW: RISK RING */
+        .risk-ring {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 6px solid rgba(239, 68, 68, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #ef4444;
+        }
+
+        /* NEW: TOOLTIP */
+        .tooltip {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 11px;
+            background: #111827;
+            padding: 6px 10px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .glass:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* RESPONSIVE FIXES */
+        @media (max-width: 640px) {
+            .risk-ring {
+                width: 50px;
+                height: 50px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tooltip {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#0B1220] text-gray-200 gradient-bg pb-24">
+
+    <nav class="bg-[#0B1220]/90 backdrop-blur border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <div class="flex items-center gap-4">
+                <div class="md:hidden">
+                    <button onclick="toggleMenu()" class="text-2xl">☰</button>
+                </div>
+                <h1 class="font-semibold text-lg fade-in">CryptoStock Shield</h1>
+            </div>
+
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="/" class="{% if request.path == '/' %}text-blue-400{% else %}hover:text-blue-400{% endif %} transition">Home</a>
+                <a href="#features" class="hover:text-blue-400 transition">Features</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'history' %}" class="hover:text-blue-400 transition">History</a>
+                {% endif %}
+                <a href="{% url 'backtest' %}" class="hover:text-blue-400 transition">Backtest</a>
+                <a href="#about" class="hover:text-blue-400 transition">About</a>
+
+                <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 text-sm shadow-lg glow">
+                    Start Scan
+                </a>
+            </div>
+
+            <div class="flex items-center gap-3 relative">
+                {% if user.is_authenticated %}
+                <div class="relative">
+                    <button onclick="openSidebar()" class="focus:outline-none flex items-center">
+                        <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold">
+                            {{ user.email|first|upper }}
+                        </div>
+                    </button>
+
+                    <div id="profileMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#111827] border border-gray-700 rounded-xl shadow-lg overflow-hidden z-50">
+                        <div class="px-4 py-3 border-b border-gray-700 text-sm text-gray-400">
+                            {{ user.email }}
+                        </div>
+                        <a href="{% url 'profile' %}" class="block px-4 py-2 hover:bg-gray-800 text-sm">Profile</a>
+                        <a href="{% url 'history' %}" class="block px-4 py-2 hover:bg-gray-800 text-sm">History</a>
+                        <a href="{% url 'logout' %}" class="block px-4 py-2 text-red-400 hover:bg-gray-800 text-sm">Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <button onclick="openAuth(); showLogin();" class="text-gray-300 hover:text-white transition">Login</button>
+                <button onclick="openAuth(); showRegister();" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition glow">
+                    Register
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden flex-col px-6 pb-4 space-y-3 md:hidden bg-[#0B1220] border-b border-gray-800">
+        <a href="/" class="block py-2">Home</a>
+        <a href="#features" class="block py-2">Features</a>
+        <a href="{% url 'backtest' %}" class="block py-2">Backtest</a>
+        <a href="#about" class="block py-2">About</a>
+        <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg inline-block w-fit">Start Scan</a>
+    </div>
+
+    <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+
+        <div class="fade-in">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Detect Market Manipulation Before It Impacts Price
+            </h1>
+
+            <p class="text-gray-400 mb-6">
+                Analyze stocks and crypto in seconds. Identify unusual trading activity and get early risk signals before sudden price movements.
+            </p>
+
+            <p class="text-sm text-gray-500 mb-2">
+                Supports Indian stocks (NSE/BSE) and major cryptocurrency markets
+            </p>
+
+            <p class="text-xs text-gray-500 mb-8">
+                Example: BTC/USDT, RELIANCE, DOGE
+            </p>
+
+            <div class="flex gap-4 mb-6">
+                <a href="{% url 'scan' %}" class="bg-blue-500 px-6 py-3 rounded-lg hover:bg-blue-600 transition shadow-lg glow">
+                    Start Scan
+                </a>
+
+                <a href="#preview" class="border border-gray-600 px-6 py-3 rounded-lg hover:bg-gray-800 transition">
+                    View Demo
+                </a>
+            </div>
+
+            <p class="text-sm text-gray-500">
+                ✔ No setup required • ✔ Results in seconds • ✔ No trading access needed
+            </p>
+        </div>
+
+        <div class="glass p-6 rounded-xl border border-gray-700 shadow-xl float relative overflow-hidden">
+
+            <div class="flex items-center gap-2 text-xs text-green-400 mb-2">
+                <span class="live-dot"></span> AI Live Analysis
+            </div>
+
+            <h3 class="mb-2 text-gray-400">BTC/USDT Analysis</h3>
+
+            <div id="riskScore" class="text-5xl font-bold text-red-500 pulse">87%</div>
+
+            <span id="riskBadge" class="inline-block mt-2 mb-4 bg-red-500/10 text-red-400 px-3 py-1 rounded">
+                HIGH RISK
+            </span>
+
+            <div class="grid grid-cols-2 gap-3 text-sm text-gray-400">
+                <p>Volume Spike</p>
+                <p class="text-red-400">High</p>
+                <p>Momentum</p>
+                <p>Strong</p>
+                <p>Activity</p>
+                <p class="text-yellow-400">Abnormal</p>
+            </div>
+
+            <div class="mt-4 text-sm text-gray-300">
+                Expected Movement: <span class="text-yellow-400">2–6 hours</span>
+            </div>
+
+            <div class="h-40 mt-6">
+                <canvas id="riskChart"></canvas>
+            </div>
+
+            <div class="risk-ring" id="riskRing">87%</div>
+
+            <div class="tooltip">Live AI confidence increasing...</div>
+
+            <div class="scan-line"></div>
+
+        </div>
+
+    </section>
+
+    <section class="border-y border-gray-800 py-6 text-center text-sm text-gray-400 fade-in">
+        Real-time analysis • Stocks & Crypto • Built for everyday investors • No brokerage integration required
+    </section>
+
+    <section id="features" class="max-w-7xl mx-auto px-6 py-20 border-t border-gray-800">
+
+        <h2 class="text-2xl text-center mb-12 font-semibold fade-in">Core Features</h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="glass p-6 rounded-xl border border-gray-700 transition fade-in">
+                <h3 class="font-semibold mb-2">Instant Risk Score</h3>
+                <p class="text-gray-400 text-sm">Get a clear risk level instantly.</p>
+            </div>
+
+            <div class="glass p-6 rounded-xl border border-gray-700 transition fade-in">
+                <h3 class="font-semibold mb-2">Early Warning Alerts</h3>
+                <p class="text-gray-400 text-sm">Identify potential price drops early.</p>
+            </div>
+
+            <div class="glass p-6 rounded-xl border border-gray-700 transition fade-in">
+                <h3 class="font-semibold mb-2">Smart Pattern Detection</h3>
+                <p class="text-gray-400 text-sm">Detect unusual behavior automatically.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-20 border-t border-gray-800">
+
+        <h2 class="text-2xl text-center mb-10 font-semibold fade-in">Test Strategy with Backtesting</h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <div class="glass p-6 rounded-xl border border-gray-700 fade-in">
+                <h3 class="font-semibold mb-2">Run on Historical Data</h3>
+                <p class="text-gray-400 text-sm">
+                    Apply the model to past data and evaluate manipulation detection performance.
+                </p>
+            </div>
+
+            <div class="glass p-6 rounded-xl border border-gray-700 fade-in">
+                <h3 class="font-semibold mb-2">Evaluate Accuracy</h3>
+                <p class="text-gray-400 text-sm">
+                    Measure prediction reliability across different market conditions.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-20 border-t border-gray-800">
+
+        <h2 class="text-2xl text-center mb-10 font-semibold fade-in">Why Was This Flagged?</h2>
+
+        <div class="glass p-6 rounded-xl border border-gray-700 fade-in">
+            <ul class="text-sm text-gray-400 space-y-1">
+                <li>• Sudden volume spike (+240%)</li>
+                <li>• Rapid price acceleration</li>
+                <li>• Clustered trading activity</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <section class="text-center py-20 fade-in">
+
+        <h2 class="text-2xl mb-4">Start Analyzing Market Risk Now</h2>
+
+        <div class="flex justify-center gap-4">
+            <a href="{% url 'scan' %}" class="bg-blue-500 px-6 py-3 rounded-lg hover:bg-blue-600 transition shadow-lg glow">
+                Start Scan
+            </a>
+
+            <a href="#preview" class="border border-gray-600 px-6 py-3 rounded-lg hover:bg-gray-800 transition">
+                Try Demo
+            </a>
+        </div>
+
+        <p class="text-sm text-gray-500 mt-3">Takes less than 10 seconds</p>
+
+    </section>
+
+    <div class="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 glass border border-gray-700 px-6 py-3 rounded-xl shadow-lg flex gap-4 z-50">
+        <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 text-sm glow">
+            Start Scan
+        </a>
+        <a href="#preview" class="border border-gray-600 px-4 py-2 rounded-lg hover:bg-gray-800 text-sm">
+            Demo
+        </a>
+    </div>
+
+    <section id="info" class="max-w-7xl mx-auto px-6 py-20 border-t border-gray-800">
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 text-sm text-gray-400">
+
+            <div id="about">
+                <h3 class="text-white text-lg mb-3">About</h3>
+                <p>
+                    AI-powered manipulation detection system for stocks & crypto.
+                    Designed to identify unusual trading behavior and provide early risk signals.
+                </p>
+            </div>
+
+            <div id="disclaimer">
+                <h3 class="text-white text-lg mb-3">Disclaimer</h3>
+                <p>
+                    Not financial advice. This tool provides analytical insights only.
+                    Use at your own risk. Always do your own research before investing.
+                </p>
+            </div>
+
+            <div id="privacy">
+                <h3 class="text-white text-lg mb-3">Privacy Policy</h3>
+                <p>
+                    We do not sell your data. Basic usage data may be collected to improve system performance.
+                </p>
+            </div>
+
+            <div id="terms">
+                <h3 class="text-white text-lg mb-3">Terms of Use</h3>
+                <p>
+                    By using this platform, you agree that predictions are probabilistic and not guaranteed.
+                </p>
+            </div>
+
+            <div id="github">
+                <h3 class="text-white text-lg mb-3">GitHub</h3>
+                <p>
+                    View source code and contribute to the project.
+                </p>
+                <a href="#" class="text-blue-400 hover:underline">Coming Soon</a>
+            </div>
+
+            <div id="docs">
+                <h3 class="text-white text-lg mb-3">Documentation</h3>
+                <p>
+                    Learn how the model works, APIs, and integration details.
+                </p>
+                <a href="#" class="text-blue-400 hover:underline">Coming Soon</a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer class="border-t border-gray-700 py-10 text-sm text-gray-400">
+
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-6">
+
+            <div>
+                <h4 class="text-white mb-2">Product</h4>
+                <a href="{% url 'scan' %}" class="block hover:text-white">Scan</a>
+                <a href="{% url 'backtest' %}" class="block hover:text-white">Backtest</a>
+                <a href="#features" class="block hover:text-white">Features</a>
+            </div>
+
+            <div>
+                <h4 class="text-white mb-2">Company</h4>
+                <a href="#about" class="block hover:text-white">About</a>
+            </div>
+
+            <div>
+                <h4 class="text-white mb-2">Legal</h4>
+                <a href="#disclaimer" class="block hover:text-white">Disclaimer</a>
+                <a href="#privacy" class="block hover:text-white">Privacy Policy</a>
+                <a href="#terms" class="block hover:text-white">Terms of Use</a>
+            </div>
+
+            <div>
+                <h4 class="text-white mb-2">Links</h4>
+                <a href="#github" class="block hover:text-white">GitHub</a>
+                <a href="#docs" class="block hover:text-white">Documentation</a>
+            </div>
+
+        </div>
+
+        <p class="text-center mt-6 text-gray-600">© 2026 CryptoStock Shield</p>
+
+    </footer>
+
+    <div id="authModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+        <div class="bg-[#0B1220] w-full max-w-md mx-4 rounded-xl shadow-xl border border-gray-700 p-6 relative">
+            <button onclick="closeAuth()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg">✕</button>
+
+            <div class="flex mb-6 border-b border-gray-700">
+                <button onclick="showLogin()" id="loginTab" class="flex-1 py-2 text-blue-400 border-b-2 border-blue-400">Login</button>
+                <button onclick="showRegister()" id="registerTab" class="flex-1 py-2 text-gray-400">Register</button>
+            </div>
+
+            <form id="loginForm" class="space-y-4">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Email"
+                    class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <input type="password" name="password" placeholder="Password"
+                    class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <p id="loginError" class="text-red-400 text-sm whitespace-pre-line hidden"></p>
+                <button class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg">
+                    Login
+                </button>
+                <p class="text-sm text-gray-400 text-center">
+                    Don’t have an account?
+                    <span onclick="showRegister()" class="text-blue-400 cursor-pointer">Register</span>
+                </p>
+            </form>
+
+            <form id="registerForm" class="space-y-4 hidden">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <input type="password" name="password1" placeholder="Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <input type="password" name="password2" placeholder="Confirm Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <p id="registerError" class="text-red-400 text-sm whitespace-pre-line hidden"></p>
+                <button class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg">
+                    Register
+                </button>
+                <p class="text-sm text-gray-400 text-center">
+                    Already have an account?
+                    <span onclick="showLogin()" class="text-blue-400 cursor-pointer">Login</span>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("mobileMenu").classList.toggle("hidden");
+        }
+
+        // SAFE CSRF helper (Cookie Based)
+        function getCSRFToken() {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, 10) === 'csrftoken=') {
+                        cookieValue = decodeURIComponent(cookie.substring(10));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // DELETE ACCOUNT FUNCTION
+        async function deleteAccount() {
+            const confirmDelete = confirm(
+                "⚠️ Are you sure you want to delete your account?\nThis action cannot be undone."
+            );
+
+            if (!confirmDelete) return;
+
+            try {
+                const response = await fetch("{% url 'delete_account' %}", {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: {
+                        "X-CSRFToken": getCSRFToken(),
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert("Account deleted successfully.");
+                    window.location.href = data.redirect;
+                } else {
+                    alert(data.error || "Failed to delete account");
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Server error. Try again.");
+            }
+        }
+
+        // ERROR FORMATTING HELPER
+        function formatErrors(errorData) {
+            try {
+                let errors = JSON.parse(errorData);
+                let messages = [];
+
+                for (let field in errors) {
+                    errors[field].forEach(e => {
+                        messages.push("• " + e.message);
+                    });
+                }
+
+                return messages.join("\n");
+            } catch {
+                return errorData; // fallback
+            }
+        }
+
+        // LOGIN AJAX
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            const res = await fetch("{% url 'login' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCSRFToken()
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                let err = document.getElementById("loginError");
+                err.innerText = "• " + data.error;
+                err.classList.remove("hidden");
+            }
+        });
+
+        // REGISTER AJAX
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            const res = await fetch("{% url 'register' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCSRFToken()
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                let err = document.getElementById("registerError");
+                err.innerText = formatErrors(data.error);
+                err.classList.remove("hidden");
+            }
+        });
+
+        // SIDEBAR CONTROLS
+        function openSidebar() {
+            document.getElementById("profileSidebar").classList.remove("translate-x-full");
+            document.getElementById("sidebarBackdrop").classList.remove("hidden");
+        }
+
+        function closeSidebar() {
+            document.getElementById("profileSidebar").classList.add("translate-x-full");
+            document.getElementById("sidebarBackdrop").classList.add("hidden");
+        }
+
+        // AUTH MODAL CONTROLS
+        function openAuth() {
+            document.getElementById("authModal").classList.remove("hidden");
+            document.getElementById("authModal").classList.add("flex");
+        }
+
+        function closeAuth() {
+            document.getElementById("authModal").classList.add("hidden");
+            document.getElementById("authModal").classList.remove("flex");
+        }
+
+        function showLogin() {
+            document.getElementById("loginForm").classList.remove("hidden");
+            document.getElementById("registerForm").classList.add("hidden");
+            document.getElementById("loginTab").classList.add("text-blue-400", "border-blue-400");
+            document.getElementById("registerTab").classList.remove("text-blue-400", "border-blue-400");
+        }
+
+        function showRegister() {
+            document.getElementById("loginForm").classList.add("hidden");
+            document.getElementById("registerForm").classList.remove("hidden");
+            document.getElementById("registerTab").classList.add("text-blue-400", "border-blue-400");
+            document.getElementById("loginTab").classList.remove("text-blue-400", "border-blue-400");
+        }
+
+        // RISK UI LOGIC
+        let el = document.getElementById("riskScore");
+        let ring = document.getElementById("riskRing");
+        let badge = document.getElementById("riskBadge");
+        let val = 0;
+        let target = 87;
+
+        let interval = setInterval(() => {
+            if (val >= target) clearInterval(interval);
+            else {
+                val++;
+                if (el) el.innerText = val + "%";
+                if (ring) ring.innerText = val + "%";
+            }
+        }, 15);
+
+        function updateRiskUI(score) {
+            if (!badge) return;
+            if (score >= 80) {
+                badge.innerText = "HIGH RISK";
+                badge.className = "inline-block mt-2 mb-4 bg-red-500/10 text-red-400 px-3 py-1 rounded";
+            } else if (score >= 50) {
+                badge.innerText = "MEDIUM RISK";
+                badge.className = "inline-block mt-2 mb-4 bg-yellow-500/10 text-yellow-400 px-3 py-1 rounded";
+            } else {
+                badge.innerText = "LOW RISK";
+                badge.className = "inline-block mt-2 mb-4 bg-green-500/10 text-green-400 px-3 py-1 rounded";
+            }
+        }
+        updateRiskUI(target);
+
+        // CHART
+        new Chart(document.getElementById("riskChart"), {
+            type: "line",
+            data: {
+                labels: ["-6h", "-5h", "-4h", "-3h", "-2h", "-1h", "Now"],
+                datasets: [{
+                    data: [20, 25, 30, 45, 60, 75, 87],
+                    borderColor: "#ef4444",
+                    backgroundColor: "rgba(239, 68, 68, 0.2)",
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+    </script>
+
+    <div id="profileSidebar"
+        class="fixed top-0 right-0 h-full w-full sm:w-80 bg-[#0B1220] border-l border-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+        <div class="flex items-center justify-between p-5 border-b border-gray-800">
+            <h2 class="text-lg font-semibold"> Profile</h2>
+            <button onclick="closeSidebar()" class="text-gray-400 hover:text-white">✕</button>
+        </div>
+        <div class="p-5 border-b border-gray-800">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-lg font-bold">
+                    {{ user.email|first|upper }}
+                </div>
+                <div>
+                    <p class="text-white text-sm">{{ user.email }}</p>
+                    <p class="text-gray-400 text-xs">Active user</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-auto w-full p-5 border-t border-gray-800 space-y-2">
+            <button onclick="deleteAccount()" class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
+                Delete Account
+            </button>
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="sidebarBackdrop" onclick="closeSidebar()" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+</body>
+
+</html>

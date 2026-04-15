@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Profile | CryptoStock Shield{% endblock %}
+
+{% block content %}
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+
+    <div class="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+
+        <div>
+            <h2 class="text-2xl sm:text-3xl font-bold">Your Dashboard</h2>
+            <p class="text-gray-400">Track scans, alerts and activity</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+
+            <button onclick="deleteAccount()"
+                class="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                Delete Account
+            </button>
+
+            <a href="{% url 'logout' %}"
+                class="w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                Logout
+            </a>
+
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
+
+        <div class="glass p-6 rounded-xl border border-gray-700">
+            <p class="text-gray-400 text-sm">Total Scans</p>
+            <h3 class="text-2xl font-bold">{{ total_scans }}</h3>
+        </div>
+
+        <div class="glass p-6 rounded-xl border border-gray-700">
+            <p class="text-gray-400 text-sm">Completed</p>
+            <h3 class="text-2xl font-bold text-green-400">{{ completed_scans }}</h3>
+        </div>
+
+        <div class="glass p-6 rounded-xl border border-gray-700">
+            <p class="text-gray-400 text-sm">Processing</p>
+            <h3 class="text-2xl font-bold text-yellow-400">{{ pending_scans }}</h3>
+        </div>
+
+    </div>
+
+    <div class="mb-12">
+        <h3 class="text-lg sm:text-xl mb-4">Recent Alerts</h3>
+
+        <div class="space-y-3">
+            {% for alert in alerts %}
+            <div class="glass p-4 rounded-lg border border-gray-700 flex flex-col sm:flex-row sm:justify-between gap-2">
+                <p class="text-sm">{{ alert.message }}</p>
+                <span class="text-xs text-red-400">{{ alert.risk_level }}</span>
+            </div>
+            {% empty %}
+            <p class="text-gray-500">No alerts yet</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <h3 class="text-lg sm:text-xl mb-4">Recent Scans</h3>
+
+        <div class="space-y-3">
+            {% for scan in recent_scans %}
+            <div class="glass p-4 rounded-lg border border-gray-700 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                <div>
+                    <p class="text-sm">{{ scan.asset }}</p>
+                    <p class="text-xs text-gray-500">{{ scan.created_at }}</p>
+                </div>
+
+                <span class="text-xs px-3 py-1 rounded w-fit
+                    {% if scan.status == 'completed' %}bg-green-500/10 text-green-400
+                    {% elif scan.status == 'processing' %}bg-yellow-500/10 text-yellow-400
+                    {% else %}bg-gray-500/10 text-gray-400{% endif %}">
+                    {{ scan.status }}
+                </span>
+            </div>
+            {% empty %}
+            <p class="text-gray-500">No scans yet</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <h3 class="text-lg sm:text-xl mb-4">Saved Predictions</h3>
+
+        <div class="space-y-3">
+            {% for item in saved %}
+            <div class="glass p-4 rounded-lg border border-gray-700 flex flex-col sm:flex-row sm:justify-between gap-2">
+                <p class="text-sm">Risk: {{ item.prediction.risk_score }}</p>
+                <span class="text-xs text-gray-400">{{ item.saved_at }}</span>
+            </div>
+            {% empty %}
+            <p class="text-gray-500">No saved predictions</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

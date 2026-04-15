@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+{% block title %}History | CryptoStock Shield{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto mt-10 px-4 break-words">
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+        <h1 class="text-2xl sm:text-3xl font-bold text-white break-words">📊 Scan History & Analytics</h1>
+
+        <div class="flex items-center gap-2">
+            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <span class="text-green-400 text-sm">Live updating</span>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 sm:gap-6 mb-10">
+
+        <div class="bg-gray-900 p-5 rounded-xl border border-gray-800 shadow-lg">
+            <h2 class="text-white mb-3 font-semibold">📈 Risk Trend</h2>
+            <div class="h-48 sm:h-56">
+                <canvas id="riskChart"></canvas>
+            </div>
+        </div>
+
+        <div class="bg-gray-900 p-5 rounded-xl border border-gray-800 shadow-lg">
+            <h2 class="text-white mb-3 font-semibold">📊 Scan Frequency</h2>
+            <div class="h-48 sm:h-56">
+                <canvas id="freqChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <form method="get" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+        <input type="hidden" name="page" value="1">
+
+        <select name="asset" class="p-2 sm:p-2.5 rounded bg-gray-800 text-white text-sm sm:text-base w-full">
+            <option value="" {% if not asset %}selected{% endif %}>All Assets</option>
+            <option value="__CRYPTO__" {% if asset == "__CRYPTO__" %}selected{% endif %}>All Crypto</option>
+            <option value="__STOCK__" {% if asset == "__STOCK__" %}selected{% endif %}>All Stocks</option>
+            <optgroup label="Specific Crypto">
+                <option value="BTC" {% if asset == "BTC" %}selected{% endif %}>BTC</option>
+                <option value="ETH" {% if asset == "ETH" %}selected{% endif %}>ETH</option>
+                <option value="BNB" {% if asset == "BNB" %}selected{% endif %}>BNB</option>
+                <option value="XRP" {% if asset == "XRP" %}selected{% endif %}>XRP</option>
+                <option value="ADA" {% if asset == "ADA" %}selected{% endif %}>ADA</option>
+                <option value="DOGE" {% if asset == "DOGE" %}selected{% endif %}>DOGE</option>
+                <option value="SOL" {% if asset == "SOL" %}selected{% endif %}>SOL</option>
+                <option value="MATIC" {% if asset == "MATIC" %}selected{% endif %}>MATIC</option>
+                <option value="DOT" {% if asset == "DOT" %}selected{% endif %}>DOT</option>
+                <option value="LTC" {% if asset == "LTC" %}selected{% endif %}>LTC</option>
+                <option value="CSV_CRYPTO" {% if asset == "CSV_CRYPTO" %}selected{% endif %}>CSV (Crypto)</option>
+                <option value="SOCIAL_CRYPTO" {% if asset == "SOCIAL_CRYPTO" %}selected{% endif %}>Social (Crypto)</option>
+            </optgroup>
+            <optgroup label="Specific Stocks">
+                <option value="RELIANCE.NS" {% if asset == "RELIANCE.NS" %}selected{% endif %}>Reliance</option>
+                <option value="TCS.NS" {% if asset == "TCS.NS" %}selected{% endif %}>TCS</option>
+                <option value="INFY.NS" {% if asset == "INFY.NS" %}selected{% endif %}>Infosys</option>
+                <option value="HDFCBANK.NS" {% if asset == "HDFCBANK.NS" %}selected{% endif %}>HDFC</option>
+                <option value="ICICIBANK.NS" {% if asset == "ICICIBANK.NS" %}selected{% endif %}>ICICI</option>
+                <option value="CSV_STOCK" {% if asset == "CSV_STOCK" %}selected{% endif %}>CSV (Stock)</option>
+                <option value="SOCIAL_STOCK" {% if asset == "SOCIAL_STOCK" %}selected{% endif %}>Social (Stock)</option>
+            </optgroup>
+        </select>
+
+        <select name="status" class="p-2 sm:p-2.5 rounded bg-gray-800 text-white text-sm sm:text-base">
+            <option value="">All Status</option>
+            <option value="completed" {% if status == "completed" %}selected{% endif %}>Completed</option>
+            <option value="failed" {% if status == "failed" %}selected{% endif %}>Failed</option>
+            <option value="processing" {% if status == "processing" %}selected{% endif %}>Processing</option>
+        </select>
+
+        <select name="risk" class="p-2 sm:p-2.5 rounded bg-gray-800 text-white text-sm sm:text-base">
+            <option value="">All Risk</option>
+            <option value="low" {% if risk == "low" %}selected{% endif %}>Low</option>
+            <option value="medium" {% if risk == "medium" %}selected{% endif %}>Medium</option>
+            <option value="high" {% if risk == "high" %}selected{% endif %}>High</option>
+        </select>
+
+        <select name="sort" class="p-2 sm:p-2.5 rounded bg-gray-800 text-white text-sm sm:text-base">
+            <option value="newest" {% if sort == "newest" %}selected{% endif %}>Newest</option>
+            <option value="oldest" {% if sort == "oldest" %}selected{% endif %}>Oldest</option>
+            <option value="risk_high" {% if sort == "risk_high" %}selected{% endif %}>High Risk First</option>
+            <option value="risk_low" {% if sort == "risk_low" %}selected{% endif %}>Low Risk First</option>
+        </select>
+
+        <button class="bg-blue-600 hover:bg-blue-700 transition text-white px-4 py-2 rounded col-span-1 sm:col-span-2 lg:col-span-4 font-bold text-sm sm:text-base">
+            Apply Filters
+        </button>
+    </form>
+
+    <div class="overflow-x-auto bg-gray-900 rounded-xl shadow-lg border border-gray-800 text-sm sm:text-base">
+        <table class="w-full text-left text-gray-300 whitespace-nowrap">
+            <thead class="bg-gray-800 text-gray-200">
+                <tr>
+                    <th class="p-2 sm:p-3">Asset</th>
+                    <th class="p-2 sm:p-3">Date</th>
+                    <th class="p-2 sm:p-3">Status</th>
+                    <th class="p-2 sm:p-3">Risk</th>
+                    <th class="p-2 sm:p-3">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for scan in page_obj %}
+                <tr class="border-b border-gray-700 hover:bg-gray-800 transition">
+                    <td class="p-2 sm:p-3 font-semibold">{{ scan.asset.symbol }}</td>
+                    <td class="p-2 sm:p-3">{{ scan.created_at|date:"Y-m-d H:i" }}</td>
+                    <td class="p-2 sm:p-3 capitalize">
+                        <span class="
+                            {% if scan.status == 'completed' %}text-green-400
+                            {% elif scan.status == 'failed' %}text-red-400
+                            {% else %}text-yellow-400{% endif %}
+                        ">
+                            {% if scan.status == "failed" %}
+                                <span title="{{ scan.error_message|default:'Scan failed' }}" class="cursor-help">
+                                    failed
+                                </span>
+                            {% else %}
+                                {{ scan.status }}
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td class="p-2 sm:p-3">
+                        {% if scan.prediction and scan.status == 'completed' %}
+                            {% if scan.prediction.risk_score < 0.4 %}
+                                <span class="text-green-400 font-semibold">LOW</span>
+                            {% elif scan.prediction.risk_score < 0.7 %}
+                                <span class="text-yellow-400 font-semibold">MEDIUM</span>
+                            {% else %}
+                                <span class="text-red-400 font-semibold">HIGH</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="text-gray-500">-</span>
+                        {% endif %}
+                    </td>
+                    <td class="p-2 sm:p-3">
+                        {% if scan.status == "completed" %}
+                            <a href="{% url 'results' scan.id %}" class="text-blue-400 hover:underline">View</a>
+                        {% elif scan.status == "failed" %}
+                            <span class="text-red-400 cursor-help" title="{{ scan.error_message|default:'Scan failed' }}">Failed</span>
+                        {% else %}
+                            <span class="text-yellow-400 cursor-not-allowed">Processing</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="p-4 text-center text-gray-500">No scans found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-6 text-white">
+
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&asset={{ asset }}&status={{ status }}&risk={{ risk }}&sort={{ sort }}"
+               class="px-3 sm:px-4 py-2 bg-gray-700 rounded hover:bg-gray-600 text-sm sm:text-base">
+                ← Previous
+            </a>
+        {% else %}
+            <span class="px-3 sm:px-4 py-2 bg-gray-800 rounded text-gray-500 cursor-not-allowed text-sm sm:text-base">
+                ← Previous
+            </span>
+        {% endif %}
+
+        <span class="text-gray-400 text-sm sm:text-base">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&asset={{ asset }}&status={{ status }}&risk={{ risk }}&sort={{ sort }}"
+               class="px-3 sm:px-4 py-2 bg-gray-700 rounded hover:bg-gray-600 text-sm sm:text-base">
+                Next →
+            </a>
+        {% else %}
+            <span class="px-3 sm:px-4 py-2 bg-gray-800 rounded text-gray-500 cursor-not-allowed text-sm sm:text-base">
+                Next →
+            </span>
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const MAX_POINTS = 30;
+let isFetching = false;
+
+const riskCtx = document.getElementById("riskChart").getContext("2d");
+const freqCtx = document.getElementById("freqChart").getContext("2d");
+
+function gradient(ctx, c1, c2) {
+    const g = ctx.createLinearGradient(0,0,0,300);
+    g.addColorStop(0, c1);
+    g.addColorStop(1, c2);
+    return g;
+}
+
+let riskChart = new Chart(riskCtx, {
+    type: "line",
+    data: {
+        labels: {{ risk_dates|safe }},
+        datasets: [{
+            label: "Risk %",
+            data: {{ risk_values|safe }},
+            borderColor: "#3b82f6",
+            backgroundColor: gradient(riskCtx, "rgba(59,130,246,0.4)", "transparent"),
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    // Fix 4: Updated options for responsiveness
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true, max: 100 } }
+    }
+});
+
+let freqChart = new Chart(freqCtx, {
+    type: "bar",
+    data: {
+        labels: {{ freq_dates|safe }},
+        datasets: [{
+            label: "Scans",
+            data: {{ freq_values|safe }},
+            backgroundColor: gradient(freqCtx, "rgba(34,197,94,0.5)", "transparent")
+        }]
+    },
+    // Fix 4: Updated options for responsiveness
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+async function fetchLiveData() {
+    if (isFetching) return;
+    isFetching = true;
+
+    try {
+        const res = await fetch("{% url 'history_live' %}");
+        const data = await res.json();
+
+        if (!data || !data.risk_dates) return;
+
+        riskChart.data.labels = data.risk_dates.slice(-MAX_POINTS);
+        riskChart.data.datasets[0].data = data.risk_values.slice(-MAX_POINTS);
+        riskChart.update('none'); 
+
+    } catch (e) {
+        console.error("Live update failed", e);
+    } finally {
+        isFetching = false;
+    }
+}
+
+setInterval(fetchLiveData, 5000);
+</script>
+{% endblock %}

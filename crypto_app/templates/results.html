@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %}Results | CryptoStock Shield{% endblock %}
+
+{% block content %}
+<section class="max-w-6xl mx-auto px-4 py-10 break-words">
+
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-8">
+        <div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white break-all">{{ scan.asset.symbol }} Analysis</h2>
+            <p class="text-gray-500 text-sm mt-1 uppercase tracking-widest">
+                {{ scan.asset.market_type }} • {{ scan.created_at|date:"M d, Y H:i" }}
+            </p>
+        </div>
+        <div class="sm:text-right">
+            <span class="text-xs text-gray-500 block mb-1">Model Engine</span>
+            <span class="bg-gray-800 text-blue-400 px-3 py-1 rounded-full text-xs font-mono border border-gray-700">
+                {{ prediction.model_used }}
+            </span>
+        </div>
+    </div>
+
+    {% if not user.is_authenticated %}
+    <p class="text-sm text-yellow-400 mb-6 bg-yellow-400/10 p-3 rounded-lg border border-yellow-400/20">
+        ⚡ Free scan used. Login for unlimited scans and deep-graph analysis.
+    </p>
+    {% endif %}
+
+    {% if prediction.risk_score > 0.7 %}
+    <div class="bg-red-900/50 text-red-300 p-4 rounded-xl mb-6 border border-red-500 animate-pulse flex items-start sm:items-center gap-3">
+        <span class="text-xl">🚨</span>
+        <span class="font-bold break-words">CRITICAL: Possible manipulation detected for the {{ prediction.predicted_time_window }} window.</span>
+    </div>
+    {% endif %}
+
+    <div class="mb-8 p-4 sm:p-6 rounded-2xl border-2 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 shadow-2xl
+        {% if risk_color == 'green' %} bg-green-500/10 border-green-500 text-green-400
+        {% elif risk_color == 'yellow' %} bg-yellow-500/10 border-yellow-500 text-yellow-400
+        {% else %} bg-red-500/10 border-red-500 text-red-400 {% endif %}
+    ">
+        <span class="text-4xl sm:text-5xl">{{ risk_icon|default:"🛡️" }}</span>
+        <div>
+            <h3 class="text-2xl font-bold uppercase tracking-tight">{{ risk_level }} RISK DETECTED</h3>
+            <p class="text-gray-300 mt-1">{{ message }}</p>
+        </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
+        <div class="lg:col-span-2 space-y-8">
+            
+            <div class="bg-[#111827] p-8 rounded-2xl border border-gray-800 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-6">
+                    <div>
+                        <h3 class="text-gray-400 text-sm mb-2">Manipulation Probability</h3>
+                        <div class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black 
+                            {% if risk_color == 'green' %}text-green-500
+                            {% elif risk_color == 'yellow' %}text-yellow-500
+                            {% else %}text-red-500{% endif %}">
+                            {{ risk_percent }}%
+                        </div>
+                    </div>
+                    <div class="sm:text-right">
+                        <p class="text-gray-400 text-xs">Model Certainty</p>
+                        <p class="text-2xl font-bold text-white">{{ prediction.confidence }}%</p>
+                        <p class="text-[10px] text-gray-600 max-w-[120px] leading-tight sm:ml-auto">Statistical likelihood of prediction accuracy.</p>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-3 sm:h-4 overflow-hidden">
+                    <div class="h-full transition-all duration-1000 
+                        {% if risk_color == 'green' %}bg-green-500{% elif risk_color == 'yellow' %}bg-yellow-500{% else %}bg-red-500{% endif %}"
+                        style="width: {{ risk_percent }}%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#111827] p-4 sm:p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h3 class="text-white font-bold mb-6 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Intelligence Summary
+                </h3>
+                
+                <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
+                    <div class="bg-gray-800/30 p-4 rounded-xl border border-gray-700/50">
+                        <p class="text-gray-400 text-xs uppercase mb-1">Time Window</p>
+                        <p class="text-white font-semibold">{{ prediction.predicted_time_window }}</p>
+                    </div>
+                    <div class="bg-gray-800/30 p-4 rounded-xl border border-gray-700/50">
+                        <p class="text-gray-400 text-xs uppercase mb-1">Anomaly Score</p>
+                        <p class="text-white font-semibold">{{ prediction.anomaly_score }}</p>
+                    </div>
+                    <div class="bg-gray-800/30 p-4 rounded-xl border border-gray-700/50">
+                        <p class="text-gray-400 text-xs uppercase mb-1">Market Sentiment</p>
+                        <p class="text-white font-semibold">Analyzing Social...</p>
+                    </div>
+                    <div class="bg-gray-800/30 p-4 rounded-xl border border-gray-700/50">
+                        <p class="text-gray-400 text-xs uppercase mb-1">Asset Class</p>
+                        <p class="text-white font-semibold">{{ scan.asset.market_type|title }}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 bg-blue-500/5 p-3 rounded-xl border border-blue-500/20">
+                        <span class="text-blue-500">📊</span>
+                        <p class="text-sm text-gray-300">Anomaly Index of <strong>{{ prediction.anomaly_score }}</strong> suggests {% if prediction.anomaly_score > 0.5 %}significant deviation from volume baseline.{% else %}standard price movement behavior.{% endif %}</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-blue-500/5 p-3 rounded-xl border border-blue-500/20">
+                        <span class="text-blue-500">🕒</span>
+                        <p class="text-sm text-gray-300">Risk monitoring is highly recommended for the next <strong>{{ prediction.predicted_time_window }}</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#111827] p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h3 class="text-white font-bold mb-4">🧠 AI Explanation</h3>
+
+                {% if prediction.explanation %}
+                    <p class="text-gray-300 mb-4">
+                        {{ prediction.explanation.summary }}
+                    </p>
+
+                    <div class="space-y-2 text-sm text-gray-400">
+                        {% for k, v in prediction.explanation.feature_importance.items %}
+                            <div class="flex flex-col sm:flex-row sm:justify-between border-b border-gray-700 pb-1 gap-1">
+                                <span>{{ k }}</span>
+                                <span>{{ v }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-gray-500">No explanation available</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="space-y-6 w-full">
+            <div class="bg-blue-600 p-4 sm:p-6 rounded-2xl text-white shadow-lg shadow-blue-900/20">
+                <h3 class="font-bold mb-4 flex items-center gap-2">
+                    <span>⚡</span> Market Snapshot
+                </h3>
+                <div class="space-y-4 text-sm font-medium">
+                    <div class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-80">Risk Level</span>
+                        <span>{{ risk_level }}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-80">Anomaly Score</span>
+                        <span>{{ prediction.anomaly_score }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="opacity-80">Analysis Depth</span>
+                        <span>Multi-Graph AI</span>
+                    </div>
+                </div>
+                <a href="{% url 'download_report' scan.id %}" class="mt-6 block w-full bg-white text-blue-600 text-center py-3 rounded-xl font-bold hover:bg-blue-50 transition shadow-lg text-sm sm:text-base">
+                    Download PDF Audit
+                </a>
+            </div>
+
+            <div class="bg-[#111827] p-4 sm:p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h3 class="text-gray-400 text-sm mb-4">Quick Actions</h3>
+                <div class="flex flex-col gap-3">
+                    <a href="{% url 'scan' %}" class="bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-xl text-sm text-center font-semibold transition border border-gray-700">
+                        Run New Scan
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-[#111827] p-4 sm:p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h3 class="text-gray-400 text-sm mb-4">Technical Breakdown</h3>
+                <ul class="text-sm text-gray-300 space-y-3">
+                    <li class="flex justify-between"><span class="text-gray-500">Risk:</span> <strong>{{ risk_level }}</strong></li>
+                    <li class="flex justify-between"><span class="text-gray-500">Window:</span> <span>{{ prediction.predicted_time_window }}</span></li>
+                    <li class="flex justify-between"><span class="text-gray-500">Anomaly:</span> <span>{{ prediction.anomaly_score }}</span></li>
+                    <li class="flex justify-between"><span class="text-gray-500">Engine:</span> <span class="text-xs font-mono text-blue-400">{{ prediction.model_used }}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

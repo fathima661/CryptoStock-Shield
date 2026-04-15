@@ -1,0 +1,433 @@
+{% extends "base.html" %}
+
+{% block title %}Scan Market | CryptoStock Shield{% endblock %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div id="processingUI" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center backdrop-blur-sm">
+    <div class="bg-gray-900 p-6 sm:p-8 mx-4 rounded-2xl border border-gray-700 max-w-sm w-full text-center">
+        <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <h3 class="text-xl font-bold text-white mb-4">AI Analysis in Progress</h3>
+        <div id="steps" class="space-y-2 text-left text-gray-400"></div>
+    </div>
+</div>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+
+    <div>
+        <div class="mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-white">AI Market Scanner</h2>
+            <p class="text-gray-400 text-sm">
+                Detect manipulation risk using ML + Graph AI models
+            </p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" id="scanForm"
+              class="bg-[#111827] p-4 sm:p-6 rounded-2xl border border-gray-700 space-y-6 shadow-xl">
+
+            {% csrf_token %}
+
+            <input type="hidden" name="input_type" id="inputType" value="ticker">
+
+            <div>
+                <label class="block text-sm text-gray-400 mb-2 break-words">Select Market</label>
+                <select name="market_type" id="marketSelect" required
+                        class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
+                    <option value="" selected disabled>Select Market First</option>
+                    <option value="crypto">Crypto</option>
+                    <option value="stock">Stock</option>
+                </select>
+                <p class="text-xs text-gray-500 mt-2">
+                    Please choose Crypto or Stock before scanning
+                </p>
+            </div>
+
+            <div>
+                <label class="block text-sm text-gray-400 mb-2 break-words">Input Method</label>
+                <div class="grid grid-cols-3 gap-2 sm:gap-3">
+                    <div class="tab-btn active-tab" data-type="ticker">Ticker</div>
+                    <div class="tab-btn" data-type="csv">CSV</div>
+                    <div class="tab-btn" data-type="social">Social</div>
+                </div>
+            </div>
+
+            <div id="tickerInput" class="space-y-2">
+                <label class="block text-sm text-gray-400 break-words">Select Asset</label>
+                <select name="ticker_input" id="tickerSelect" class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
+                    <option value="">Select Asset</option>
+                
+                    <optgroup label="Crypto" id="group-crypto">
+                        <option value="BTC">Bitcoin</option>
+                        <option value="ETH">Ethereum</option>
+                        <option value="BNB">BNB</option>
+                        <option value="XRP">XRP</option>
+                        <option value="ADA">ADA</option>
+                        <option value="DOGE">DOGE</option>
+                        <option value="SOL">SOL</option>
+                        <option value="MATIC">MATIC</option>
+                        <option value="DOT">DOT</option>
+                        <option value="LTC">LTC</option>
+                    </optgroup>
+                
+                    <optgroup label="Stocks (India)" id="group-stock">
+                        <option value="RELIANCE.NS">Reliance</option>
+                        <option value="TCS.NS">TCS</option>
+                        <option value="INFY.NS">Infosys</option>
+                        <option value="HDFCBANK.NS">HDFC Bank</option>
+                        <option value="ICICIBANK.NS">ICICI Bank</option>
+                    </optgroup>
+                </select>
+                <p class="text-xs text-gray-500 mt-1">
+                    Choose an asset for instant AI analysis
+                </p>
+            </div>
+
+            <div id="csvInput" class="hidden space-y-2">
+                <label class="block text-sm text-gray-400 break-words">Upload CSV</label>
+                <input type="file" name="csv_file" id="id_csv_file" accept=".csv"
+                       class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
+                <p class="text-xs text-gray-500 mt-2">Upload price + volume CSV</p>
+            </div>
+
+            <div id="socialInput" class="hidden space-y-2">
+                <label class="block text-sm text-gray-400 break-words">Social Signal (Link or Text)</label>
+                <textarea name="social_link" id="id_social_link" placeholder="Paste Telegram/Reddit signal or link"
+                          class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2 min-h-[100px] sm:min-h-[120px]"></textarea>
+                <p class="text-xs text-gray-500">
+                    Example: Paste text from a Twitter or Reddit post
+                </p>
+            </div>
+
+            <button id="scanBtn" type="submit"
+                    class="w-full bg-blue-500 py-3 rounded-lg font-semibold hover:bg-blue-600 transition flex justify-center items-center gap-2">
+                Run AI Scan
+            </button>
+        </form>
+    </div>
+
+    <div class="bg-[#111827] p-6 rounded-2xl border border-gray-700 shadow-xl relative overflow-hidden">
+        <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-2 text-xs text-green-400">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                AI Live Intelligence Preview
+            </div>
+            <div class="text-[10px] text-gray-500">
+                Updated: <span id="lastUpdated">--:--:--</span>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <p class="text-xs text-gray-500">Current Asset</p>
+            <p id="activeAsset" class="text-sm font-semibold text-blue-300">None Selected</p>
+        </div>
+
+        <h3 class="text-gray-400 mb-3">Instant Risk Preview</h3>
+        <div id="previewScore" class="text-4xl sm:text-5xl font-bold text-blue-400 mb-2">--</div>
+        <span id="previewBadge" class="inline-block mb-4 bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">
+            Awaiting Input
+        </span>
+
+        <div class="grid grid-cols-2 gap-3 text-sm text-gray-400 border-t border-gray-800 pt-4">
+            <div>
+                <p>Certainty</p>
+                <p id="momVal" class="text-white font-bold">-</p>
+            </div>
+            <div>
+                <p>Anomaly Index</p>
+                <p id="anoVal" class="text-white font-bold">-</p>
+            </div>
+        </div>
+        
+        <div class="h-40 sm:h-48 mt-6">
+            <canvas id="previewChart"></canvas>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<style>
+    /* Fix 3b: Touch-friendly tab buttons */
+    .tab-btn {
+        background: #020617;
+        padding: 10px;
+        font-size: 13px;
+        border-radius: 8px;
+        border: 1px solid #374151;
+        text-align: center;
+        cursor: pointer;
+        color: #9CA3AF;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    @media (max-width: 640px) {
+        .tab-btn {
+            padding: 8px;
+            font-size: 12px;
+        }
+    }
+    .active-tab {
+        border: 1px solid #3b82f6;
+        background: linear-gradient(135deg, #1e3a8a, #2563eb);
+        color: white;
+    }
+
+    optgroup[hidden] {
+        display: none !important;
+    }
+</style>
+
+<script>
+// (JS logic kept intact - showing only Fix 5b: Chart.js Options update)
+const marketSelect = document.getElementById("marketSelect");
+const tickerSelect = document.getElementById("tickerSelect");
+const cryptoGroup = document.getElementById("group-crypto");
+const stockGroup = document.getElementById("group-stock");
+const previewScore = document.getElementById("previewScore");
+const previewBadge = document.getElementById("previewBadge");
+const lastUpdated = document.getElementById("lastUpdated");
+const momVal = document.getElementById("momVal");
+const anoVal = document.getElementById("anoVal");
+const activeAsset = document.getElementById("activeAsset");
+const scanForm = document.getElementById("scanForm");
+const scanBtn = document.getElementById("scanBtn");
+const processingUI = document.getElementById("processingUI");
+const csvFileInput = document.getElementById("id_csv_file");
+const socialInput = document.getElementById("id_social_link");
+
+let previewChart;
+let liveInterval = null;
+let chartData = [];
+let currentPreviewTicker = null;
+let fetchToken = 0;
+
+function resetPreviewUI(message = "Awaiting Input", assetLabel = "None Selected") {
+    if (liveInterval) { clearInterval(liveInterval); liveInterval = null; }
+    currentPreviewTicker = null;
+    fetchToken++;
+    chartData = [];
+    if (previewChart) { previewChart.destroy(); previewChart = null; }
+    previewScore.innerText = "--";
+    lastUpdated.innerText = "--:--:--";
+    momVal.innerText = "-";
+    anoVal.innerText = "-";
+    activeAsset.innerText = assetLabel;
+    previewBadge.innerText = message;
+    previewBadge.className = "inline-block mb-4 bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm";
+}
+
+function setPreviewLoading(ticker) {
+    previewScore.innerText = "--";
+    lastUpdated.innerText = "--:--:--";
+    momVal.innerText = "-";
+    anoVal.innerText = "-";
+    activeAsset.innerText = ticker;
+    previewBadge.innerText = `Analyzing ${ticker}...`;
+    previewBadge.className = "inline-block mb-4 bg-gray-600 text-white px-3 py-1 rounded text-sm animate-pulse";
+    chartData = [];
+    if (previewChart) { previewChart.destroy(); previewChart = null; }
+}
+
+marketSelect.addEventListener("change", () => {
+    const market = marketSelect.value;
+    tickerSelect.value = "";
+    if (market === "crypto") { cryptoGroup.hidden = false; stockGroup.hidden = true; } 
+    else if (market === "stock") { cryptoGroup.hidden = true; stockGroup.hidden = false; }
+    if (document.getElementById("inputType").value === "ticker") {
+        resetPreviewUI("Select a new asset", "None Selected");
+    }
+});
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active-tab"));
+        btn.classList.add("active-tab");
+        const type = btn.dataset.type;
+        document.getElementById("inputType").value = type;
+        ["ticker", "csv", "social"].forEach(id => {
+            const el = document.getElementById(id + "Input");
+            if (id === type) {
+                el.classList.remove("hidden");
+                el.querySelectorAll("input,select,textarea").forEach(i => i.disabled = false);
+            } else {
+                el.classList.add("hidden");
+                el.querySelectorAll("input,select,textarea").forEach(i => i.disabled = true);
+            }
+        });
+        if (type === "ticker") {
+            tickerSelect.value ? startLivePreview(tickerSelect.value) : resetPreviewUI("Select an asset to preview", "None Selected");
+        } else if (type === "csv") { handleCsvPreview(); } 
+        else if (type === "social") { handleSocialPreview(); }
+    });
+});
+
+function animateValue(el, start, end, duration = 400) {
+    let startTime = null;
+    function step(ts) {
+        if (!startTime) startTime = ts;
+        let progress = Math.min((ts - startTime) / duration, 1);
+        let value = Math.floor(progress * (end - start) + start);
+        el.innerText = value + "%";
+        if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+
+function startLivePreview(ticker) {
+    if (!ticker) return;
+    if (liveInterval) { clearInterval(liveInterval); }
+    currentPreviewTicker = ticker;
+    setPreviewLoading(ticker);
+    fetchPreview(ticker);
+    liveInterval = setInterval(async () => {
+        if (document.getElementById("inputType").value !== "ticker") return;
+        if (tickerSelect.value !== ticker) return;
+        await fetchPreview(ticker);
+    }, 10000);
+}
+
+async function fetchPreview(ticker) {
+    const myToken = ++fetchToken;
+    try {
+        const res = await fetch(`/live-preview/?ticker=${encodeURIComponent(ticker)}`);
+        const data = await res.json();
+        if (myToken !== fetchToken || document.getElementById("inputType").value !== "ticker" || tickerSelect.value !== ticker) return;
+        if (data.error) {
+            previewBadge.innerText = "Preview unavailable";
+            return;
+        }
+        renderPreviewData(data, ticker);
+    } catch (err) {
+        if (myToken !== fetchToken) return;
+        previewBadge.innerText = "Preview unavailable";
+    }
+}
+
+async function handleCsvPreview() {
+    const file = csvFileInput.files[0];
+    const market = marketSelect.value || "crypto";
+    if (!file) { resetPreviewUI("Upload a CSV file to preview", "CSV Upload Mode"); return; }
+    const formData = new FormData();
+    formData.append("csv_file", file);
+    formData.append("input_type", "csv");
+    formData.append("market_type", market);
+    setPreviewLoading("CSV Upload");
+    try {
+        const res = await fetch("/live-preview/?input_type=csv", { method: "POST", body: formData });
+        const data = await res.json();
+        data.error ? (previewBadge.innerText = "CSV preview unavailable") : renderPreviewData(data, "CSV Upload");
+    } catch (err) { previewBadge.innerText = "CSV preview unavailable"; }
+}
+
+async function handleSocialPreview() {
+    const socialText = socialInput.value.trim();
+    const market = marketSelect.value || "crypto";
+    if (!socialText) { resetPreviewUI("Paste a social signal to preview", "Social Signal Mode"); return; }
+    const formData = new FormData();
+    formData.append("social_link", socialText);
+    formData.append("input_type", "social");
+    formData.append("market_type", market);
+    setPreviewLoading("Social Signal");
+    try {
+        const res = await fetch("/live-preview/?input_type=social", { method: "POST", body: formData });
+        const data = await res.json();
+        data.error ? (previewBadge.innerText = "Social preview unavailable") : renderPreviewData(data, "Social Signal");
+    } catch (err) { previewBadge.innerText = "Social preview unavailable"; }
+}
+
+function renderPreviewData(data, label) {
+    lastUpdated.innerText = data.timestamp ? new Date(data.timestamp * 1000).toLocaleTimeString() : new Date().toLocaleTimeString();
+    activeAsset.innerText = label;
+    const risk = Math.round((data.risk || 0) * 100);
+    animateValue(previewScore, parseInt(previewScore.innerText) || 0, risk);
+    momVal.innerText = Math.round((data.confidence || 0) * 100) + "%";
+    anoVal.innerText = Number(data.anomaly || 0).toFixed(2);
+    if (risk > 70) {
+        previewBadge.innerText = "🚨 High Risk";
+        previewBadge.className = "inline-block mb-4 bg-red-600 text-white px-3 py-1 rounded text-sm animate-pulse";
+    } else if (risk > 40) {
+        previewBadge.innerText = "Medium Risk";
+        previewBadge.className = "inline-block mb-4 bg-yellow-500 text-black px-3 py-1 rounded text-sm";
+    } else {
+        previewBadge.innerText = "Organic Activity";
+        previewBadge.className = "inline-block mb-4 bg-green-600 text-white px-3 py-1 rounded text-sm";
+    }
+    if (data.history && Array.isArray(data.history) && data.history.length > 0) {
+        chartData = data.history.map(v => Math.round(v * 100));
+        updateChart();
+    } else { pushChart(risk); }
+}
+
+function updateChart() {
+    const ctx = document.getElementById("previewChart").getContext("2d");
+    if (!previewChart) {
+        previewChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: chartData.map((_, i) => i),
+                datasets: [{
+                    data: chartData,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderWidth: 2,
+                    borderColor: "#3b82f6"
+                }]
+            },
+            options: {
+                // Fix 5b: Aspect ratio settings
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 300 },
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { display: false, min: 0, max: 100 }
+                }
+            }
+        });
+    } else {
+        previewChart.data.labels = chartData.map((_, i) => i);
+        previewChart.data.datasets[0].data = chartData;
+        previewChart.update();
+    }
+}
+
+function pushChart(value) {
+    if (chartData.length > 20) chartData.shift();
+    chartData.push(value);
+    updateChart();
+}
+
+tickerSelect.addEventListener("change", () => {
+    if (document.getElementById("inputType").value !== "ticker") return;
+    tickerSelect.value ? startLivePreview(tickerSelect.value) : resetPreviewUI("Select an asset to preview", "None Selected");
+});
+
+csvFileInput.addEventListener("change", () => {
+    if (document.getElementById("inputType").value === "csv") handleCsvPreview();
+});
+
+let socialPreviewTimeout = null;
+socialInput.addEventListener("input", () => {
+    if (document.getElementById("inputType").value !== "social") return;
+    clearTimeout(socialPreviewTimeout);
+    socialPreviewTimeout = setTimeout(() => { handleSocialPreview(); }, 700);
+});
+
+scanForm.addEventListener("submit", function(e) {
+    const inputType = document.getElementById("inputType").value;
+    if (!marketSelect.value) { e.preventDefault(); alert("Please select a market."); return; }
+    if (inputType === "ticker" && !tickerSelect.value) { e.preventDefault(); alert("Please select an asset."); return; }
+    if (inputType === "csv" && !csvFileInput.files.length) { e.preventDefault(); alert("Please upload a CSV."); return; }
+    if (inputType === "social" && !socialInput.value.trim()) { e.preventDefault(); alert("Please paste a signal."); return; }
+    processingUI.classList.remove("hidden");
+    scanBtn.disabled = true;
+    scanBtn.innerText = "Processing...";
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    document.querySelector('.tab-btn[data-type="ticker"]').click();
+});
+</script>
+{% endblock %}
