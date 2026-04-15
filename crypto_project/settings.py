@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'crypto_app.middleware.GlobalExceptionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'crypto_project.urls'
@@ -203,3 +204,6 @@ EMAIL_HOST_USER = "dontcallmeformarketing@gmail.com"
 EMAIL_HOST_PASSWORD = "josw avva pghc zswj"
 DEFAULT_FROM_EMAIL = "CryptoStock Shield"
 '''
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
