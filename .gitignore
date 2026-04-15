@@ -1,15 +1,17 @@
 # Python
-venv/
 __pycache__/
 *.pyc
+venv/
 
 # Django
 db.sqlite3
 media/
 uploads/
 
-# Static build / plugins (optional if using CDN)
-static/plugins/
+# ML
+*.pkl
+*.h5
+*.joblib
 
 # OS
 .DS_Store
