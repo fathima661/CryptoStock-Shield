@@ -1,18 +1,15 @@
 # Python
+venv/
 __pycache__/
 *.pyc
-
-# Virtual env
-venv/
-env/
 
 # Django
 db.sqlite3
 media/
-staticfiles/
+uploads/
 
-# Secrets
-.env
+# Static build / plugins (optional if using CDN)
+static/plugins/
 
 # OS
 .DS_Store
