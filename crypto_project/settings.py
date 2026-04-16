@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-o70ei_jfli()(fp*#5gg!3$+y3-6bhift$d=kks54et2t=+n0$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["cryptostock-shield.onrender.com', 'localhost', '127.0.0.1"]
 
 
 # Application definition
