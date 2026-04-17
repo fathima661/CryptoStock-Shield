@@ -535,7 +535,7 @@
                 <input type="password" name="password1" placeholder="Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
                 <input type="password" name="password2" placeholder="Confirm Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
                 <p id="registerError" class="text-red-400 text-sm whitespace-pre-line hidden"></p>
-                <button class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg">
+                <button id="registerBtn" class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg">
                     Register
                 </button>
                 <p class="text-sm text-gray-400 text-center">
@@ -603,18 +603,21 @@
         // ERROR FORMATTING HELPER
         function formatErrors(errorData) {
             try {
-                let errors = JSON.parse(errorData);
+                const errors = (typeof errorData === "string")
+                    ? JSON.parse(errorData)
+                    : errorData;
+
                 let messages = [];
 
                 for (let field in errors) {
                     errors[field].forEach(e => {
-                        messages.push("• " + e.message);
+                        messages.push("• " + (e.message || e));
                     });
                 }
 
                 return messages.join("\n");
-            } catch {
-                return errorData; // fallback
+            } catch (err) {
+                return "• " + errorData;
             }
         }
 
@@ -623,49 +626,84 @@
             e.preventDefault();
 
             const formData = new FormData(this);
+            const err = document.getElementById("loginError");
 
-            const res = await fetch("{% url 'login' %}", {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": getCSRFToken()
-                },
-                body: formData
-            });
+            err.classList.add("hidden");
+            err.innerText = "";
 
-            const data = await res.json();
+            try {
+                const res = await fetch("{% url 'login' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": getCSRFToken(),
+                        "X-Requested-With": "XMLHttpRequest"
+                    },
+                    body: formData
+                });
 
-            if (data.success) {
-                window.location.href = data.redirect;
-            } else {
-                let err = document.getElementById("loginError");
-                err.innerText = "• " + data.error;
+                let data;
+                try {
+                    data = await res.json();
+                } catch {
+                    throw new Error("Invalid JSON response");
+                }
+
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    err.innerText = formatErrors(data.error);
+                    err.classList.remove("hidden");
+                }
+
+            } catch (error) {
+                console.error("Login error:", error);
+                err.innerText = "• Server error. Please try again.";
                 err.classList.remove("hidden");
             }
         });
 
-        // REGISTER AJAX
-        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+        // ✅ UPDATED REGISTER AJAX (CLEAN + CORRECT)
+        document.getElementById("registerForm").addEventListener("submit", async function(e) {
             e.preventDefault();
 
-            const formData = new FormData(this);
+            const btn = document.getElementById("registerBtn");
+            const errorBox = document.getElementById("registerError");
 
-            const res = await fetch("{% url 'register' %}", {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": getCSRFToken()
-                },
-                body: formData
-            });
+            errorBox.classList.add("hidden");
+            errorBox.innerText = "";
 
-            const data = await res.json();
+            btn.disabled = true;
+            btn.textContent = "Creating account...";
 
-            if (data.success) {
-                window.location.href = data.redirect;
-            } else {
-                let err = document.getElementById("registerError");
-                err.innerText = formatErrors(data.error);
-                err.classList.remove("hidden");
+            try {
+                const formData = new FormData(this);
+
+                const response = await fetch("{% url 'register' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": getCSRFToken(),
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    // ✅ USE FORMATTER HERE
+                    errorBox.innerText = formatErrors(data.error);
+                    errorBox.classList.remove("hidden");
+                }
+
+            } catch (err) {
+                errorBox.innerText = "• Server error. Try again.";
+                errorBox.classList.remove("hidden");
             }
+
+            btn.disabled = false;
+            btn.textContent = "Register";
         });
 
         // SIDEBAR CONTROLS

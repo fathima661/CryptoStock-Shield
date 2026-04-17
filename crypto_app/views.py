@@ -34,6 +34,7 @@ from django.utils.http import (urlsafe_base64_encode, urlsafe_base64_decode)
 from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import render_to_string
+from django.shortcuts import redirect
 
 # ==========================================
 # LOCAL APP IMPORTS
@@ -43,6 +44,7 @@ from .models import (Alert, AlertSetting, Prediction, Scan,UserProfile, SavedSca
 from .ml.predict import predict_pump
 from .utils.pdf_report import generate_pdf
 from .models import Explanation
+from .models import User
 
 # ==========================================
 # SERVICES IMPORTS
@@ -54,6 +56,7 @@ from services.model_manager import choose_model
 from services.live_state import get_state
 from services.live_signal_service import generate_live_signal
 from services.normalizer import normalize_ticker
+
 
 # ==========================================
 # LOGGER
@@ -69,10 +72,6 @@ def home(request):
 
 def about(request):
     return render(request, "about.html")
-
-
-def backtest(request):
-    return render(request, "backtest.html")
 
 
 # ==========================================
@@ -603,6 +602,8 @@ def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
 
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
         if form.is_valid():
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
@@ -612,56 +613,70 @@ def login_view(request):
             if user is not None:
                 login(request, user)
 
-                return JsonResponse({
-                    "success": True,
-                    "redirect": "/"
-                })
+                # ✅ AJAX RESPONSE
+                if is_ajax:
+                    return JsonResponse({
+                        "success": True,
+                        "redirect": "/"
+                    })
 
+                # ✅ NORMAL REQUEST
+                return redirect("/")
+
+            # ❌ INVALID LOGIN
+            if is_ajax:
+                return JsonResponse({
+                    "success": False,
+                    "error": {"__all__": ["Invalid email or password"]}
+                }, status=400)
+
+            return redirect("/")
+
+        # ❌ FORM INVALID
+        if is_ajax:
             return JsonResponse({
                 "success": False,
-                "error": "Invalid email or password"
-            })
+                "error": form.errors.get_json_data()
+            }, status=400)
 
-        return JsonResponse({
-            "success": False,
-            "error": form.errors.as_json()
-        })
+        return redirect("/")
 
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
+
 def logout_view(request):
     logout(request)
-    messages.info(request, "Logged out successfully")
     return redirect("home")
-
-
 
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
 
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
         if form.is_valid():
             user = form.save()
-
-            # create extra models
-            UserProfile.objects.create(user=user)
-            AlertSetting.objects.create(user=user)
-
-            # AUTO LOGIN AFTER REGISTER
             login(request, user)
 
-            return JsonResponse({
-                "success": True,
-                "redirect": "/"
-            })
+            if is_ajax:
+                return JsonResponse({
+                    "success": True,
+                    "redirect": "/"
+                })
 
-        return JsonResponse({
-            "success": False,
-            "error": form.errors.as_json()
-        })
+            return redirect("/")
+
+        if is_ajax:
+            return JsonResponse({
+                "success": False,
+                "error": form.errors.get_json_data()
+            }, status=400)
+
+        return redirect("/")
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 @login_required
 def delete_account(request):
@@ -1165,6 +1180,7 @@ def live_preview(request):
     return JsonResponse({"error": "Invalid preview type"}, status=400)
 
 
+
 @login_required
 def add_to_watchlist(request, asset_id):
     asset = get_object_or_404(Asset, id=asset_id)
@@ -1189,16 +1205,39 @@ def remove_from_watchlist(request, asset_id):
 # ==========================================
 # BACKTEST VIEW (FINAL - MATCHES NORMALIZER)
 # ==========================================
-
-@login_required
 def backtest_view(request):
-    history = BacktestRun.objects.filter(user=request.user).order_by("-created_at")[:5]
+    # ==========================================
+    # GUEST FREE BACKTEST LIMIT
+    # ==========================================
+    free_backtests = request.session.get("free_backtests", 0)
+
+    history = []
+    if request.user.is_authenticated:
+        history = BacktestRun.objects.filter(
+            user=request.user
+        ).order_by("-created_at")[:5]
 
     result = None
     chart_data = None
     metrics = None
 
     if request.method == "POST":
+
+        # Require login after first guest backtest
+        if not request.user.is_authenticated and free_backtests >= 1:
+            messages.warning(request, "Please login to continue using backtest.")
+            
+            form = BacktestForm(request.POST)
+
+            return render(request, "backtest.html", {
+                "form": form,
+                "history": history,
+                "result": None,
+                "chart_data": None,
+                "metrics": None,
+                "show_login_popup": True,
+            })
+
         form = BacktestForm(request.POST)
 
         if form.is_valid():
@@ -1208,7 +1247,7 @@ def backtest_view(request):
                 end_date = form.cleaned_data["end_date"]
 
                 # ===============================
-                # ✅ SYMBOL HANDLING (FINAL FIX)
+                # SYMBOL HANDLING
                 # ===============================
                 if ticker.endswith(".NS"):
                     symbol = ticker
@@ -1217,12 +1256,12 @@ def backtest_view(request):
                     symbol = f"{ticker}-USD"
                     market_type = "crypto"
 
-                print("DEBUG SYMBOL:", symbol)
-
-                # ===============================
-                # 📥 FETCH DATA
-                # ===============================
-                df = yf.download(symbol, start=start_date, end=end_date, progress=False)
+                df = yf.download(
+                    symbol,
+                    start=start_date,
+                    end=end_date,
+                    progress=False
+                )
 
                 if df is None or df.empty or "Close" not in df.columns:
                     raise ValueError(f"No market data found for {symbol}")
@@ -1231,16 +1270,14 @@ def backtest_view(request):
                     df.columns = df.columns.get_level_values(0)
 
                 # ===============================
-                # 🔥 CLEAN DATA (CRITICAL FIX)
+                # CLEAN DATA
                 # ===============================
                 df = df.copy()
                 df = df.replace([np.inf, -np.inf], np.nan)
-
-                # Remove invalid prices
                 df = df[df["Close"] > 0]
 
                 # ===============================
-                # 📊 FEATURES
+                # FEATURE ENGINEERING
                 # ===============================
                 df["daily_return"] = df["Close"].pct_change()
                 df["volatility_7d"] = df["daily_return"].rolling(7).std()
@@ -1257,7 +1294,7 @@ def backtest_view(request):
                 sequence_buffer = []
 
                 # ===============================
-                # 🤖 SIMULATION LOOP
+                # PREDICTION LOOP
                 # ===============================
                 for date, row in df.iterrows():
                     try:
@@ -1276,11 +1313,11 @@ def backtest_view(request):
                             float(row["price_ma30"]),
                         ]
 
-                        # Skip bad rows
                         if any(np.isnan(f) or np.isinf(f) for f in features):
                             continue
 
                         sequence_buffer.append(features)
+
                         if len(sequence_buffer) > 10:
                             sequence_buffer.pop(0)
 
@@ -1314,7 +1351,7 @@ def backtest_view(request):
                     raise ValueError("Prediction failed")
 
                 # ===============================
-                # 📊 METRICS (SAFE VERSION)
+                # METRICS
                 # ===============================
                 prices_np = np.array(prices)
 
@@ -1338,9 +1375,6 @@ def backtest_view(request):
                     if len(returns) > 0 and np.std(returns) > 1e-9 else 0
                 )
 
-                # ===============================
-                # 📉 MAX DRAWDOWN (SAFE)
-                # ===============================
                 peak = prices[0]
                 max_dd = 0
 
@@ -1350,9 +1384,6 @@ def backtest_view(request):
                     dd = (peak - p) / max(peak, 1e-9)
                     max_dd = max(max_dd, dd)
 
-                # ===============================
-                # 🎯 ACCURACY (SAFE)
-                # ===============================
                 risk_binary = [1 if r > 70 else 0 for r in risk_scores]
 
                 if len(returns) > 0:
@@ -1385,29 +1416,46 @@ def backtest_view(request):
                 }
 
                 # ===============================
-                # 💾 SAVE
+                # SAVE ONLY FOR LOGGED-IN USERS
                 # ===============================
-                asset, _ = Asset.objects.get_or_create(
-                    symbol=ticker,
-                    market_type=market_type,
-                    defaults={
-                        "name": ticker,
-                        "is_active": True
-                    }
-                )
+                if request.user.is_authenticated:
+                    asset, _ = Asset.objects.get_or_create(
+                        symbol=ticker,
+                        market_type=market_type,
+                        defaults={
+                            "name": ticker,
+                            "is_active": True
+                        }
+                    )
 
-                model = MLModel.objects.filter(is_active=True).first()
+                    model = MLModel.objects.filter(is_active=True).first()
 
-                result = BacktestRun.objects.create(
-                    user=request.user,
-                    asset=asset,
-                    model_version=model,
-                    start_date=start_date,
-                    end_date=end_date,
-                    simulation_results=chart_data,
-                    accuracy_score=metrics["signal_accuracy"],
-                    total_anomalies_detected=anomalies
-                )
+                    result = BacktestRun.objects.create(
+                        user=request.user,
+                        asset=asset,
+                        model_version=model,
+                        start_date=start_date,
+                        end_date=end_date,
+                        simulation_results=chart_data,
+                        accuracy_score=metrics["signal_accuracy"],
+                        total_anomalies_detected=anomalies
+                    )
+
+                    history = BacktestRun.objects.filter(
+                        user=request.user
+                    ).order_by("-created_at")[:5]
+
+                else:
+                    # Guest mock result object for template display
+                    class GuestResult:
+                        pass
+
+                    result = GuestResult()
+                    result.asset = type("obj", (), {"symbol": ticker})
+                    result.accuracy_score = metrics["signal_accuracy"]
+                    result.total_anomalies_detected = anomalies
+
+                    request.session["free_backtests"] = free_backtests + 1
 
                 messages.success(request, f"Backtest completed for {ticker}")
 
@@ -1416,8 +1464,6 @@ def backtest_view(request):
                     "start_date": start_date,
                     "end_date": end_date
                 })
-
-                history = BacktestRun.objects.filter(user=request.user).order_by("-created_at")[:5]
 
             except Exception as e:
                 print("BACKTEST ERROR:", str(e))

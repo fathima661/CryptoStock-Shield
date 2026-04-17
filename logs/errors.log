@@ -4367,3 +4367,1200 @@ Traceback (most recent call last):
     file_path = generate_pdf(
 TypeError: generate_pdf() got an unexpected keyword argument 'scan'
 2026-04-16 01:28:11,501 | ERROR | django.server | "GET /download/103/ HTTP/1.1" 500 73714
+2026-04-16 21:59:15,540 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 21:59:15,543 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 21:59:15,549 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 21:59:18,545 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 21:59:18,547 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 21:59:18,549 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:00:31,599 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 653, in register_view
+    return render(request, "register.html")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: register.html
+2026-04-16 22:00:31,606 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 653, in register_view
+    return render(request, "register.html")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: register.html
+2026-04-16 22:00:31,606 | ERROR | django.server | "GET /register/ HTTP/1.1" 500 145
+2026-04-16 22:00:38,481 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:38,481 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:38,488 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:00:39,439 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:39,446 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:39,452 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:00:40,389 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:40,389 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:40,389 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:00:40,590 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:40,590 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:40,597 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:00:40,777 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:40,784 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:40,784 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:00:41,020 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:41,028 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:41,033 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:00:41,284 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:41,284 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 616, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:00:41,284 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:09:01,771 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:01,771 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:01,778 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:09:02,350 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,352 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,354 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:09:02,558 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,558 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,561 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:09:02,762 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,763 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,763 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:09:02,956 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,957 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:02,957 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:09:03,156 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:03,158 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:03,158 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:09:03,351 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:03,352 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:03,354 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:09:03,560 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:03,561 | ERROR | django.request | Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 644, in register_view
+    user = User.objects.create_user(
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+2026-04-16 22:09:03,565 | ERROR | django.server | "POST /register/ HTTP/1.1" 500 145
+2026-04-16 22:10:03,530 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:03,533 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:03,535 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:10:13,516 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:13,522 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:13,522 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:10:23,540 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:23,542 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:23,543 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:10:33,523 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:33,524 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:33,525 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:10:43,524 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:43,525 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:43,528 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:10:53,523 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:53,525 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:10:53,527 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:11:03,543 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:03,544 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:03,546 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:11:13,530 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:13,532 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:13,534 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:11:23,535 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:23,538 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:23,539 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:11:33,535 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:33,536 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:33,539 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:11:43,541 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:43,542 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:43,544 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:11:53,532 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:53,535 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:11:53,538 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:12:03,531 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:03,534 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:03,535 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:12:13,522 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:13,523 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:13,525 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:12:23,526 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:23,528 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:23,530 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:12:52,880 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:52,881 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:52,884 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:12:53,557 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:53,557 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 971, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:12:53,557 | ERROR | django.server | "GET /live-preview/?ticker=DOGE HTTP/1.1" 500 145
+2026-04-16 22:13:31,096 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 1218, in backtest_view
+    if not GuestUsageLimitMiddleware.can_use(request, "backtest_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:13:31,100 | ERROR | django.request | Internal Server Error: /backtest/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 1218, in backtest_view
+    if not GuestUsageLimitMiddleware.can_use(request, "backtest_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:13:31,100 | ERROR | django.server | "POST /backtest/ HTTP/1.1" 500 145
+2026-04-16 22:13:35,189 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 1218, in backtest_view
+    if not GuestUsageLimitMiddleware.can_use(request, "backtest_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:13:35,191 | ERROR | django.request | Internal Server Error: /backtest/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 1218, in backtest_view
+    if not GuestUsageLimitMiddleware.can_use(request, "backtest_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:13:35,194 | ERROR | django.server | "POST /backtest/ HTTP/1.1" 500 145
+2026-04-16 22:16:08,854 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:08,857 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:08,862 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:16:18,844 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:18,845 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:18,845 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:16:29,534 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:29,534 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:29,541 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:16:39,601 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:39,602 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:39,604 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:16:49,528 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:49,529 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:49,531 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:16:59,536 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:59,538 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:16:59,540 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:17:09,527 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:17:09,529 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:17:09,532 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:17:19,523 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:17:19,532 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:17:19,534 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:17:29,536 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:17:29,537 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:17:29,539 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:18:04,296 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:18:04,296 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:18:04,296 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:18:09,524 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:18:09,524 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:18:09,528 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:18:19,531 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:18:19,532 | ERROR | django.request | Internal Server Error: /live-preview/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 968, in live_preview
+    if not GuestUsageLimitMiddleware.can_use(request, "preview_count"):
+NameError: name 'GuestUsageLimitMiddleware' is not defined
+2026-04-16 22:18:19,532 | ERROR | django.server | "GET /live-preview/?ticker=TCS.NS HTTP/1.1" 500 145
+2026-04-16 22:19:50,753 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 617, in login_view
+    return render(request, "login.html")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: login.html
+2026-04-16 22:19:50,763 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 617, in login_view
+    return render(request, "login.html")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: login.html
+2026-04-16 22:19:50,769 | ERROR | django.server | "GET /login/?next=/backtest/ HTTP/1.1" 500 145
+2026-04-16 22:19:52,415 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 617, in login_view
+    return render(request, "login.html")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: login.html
+2026-04-16 22:19:52,416 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 617, in login_view
+    return render(request, "login.html")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: login.html
+2026-04-16 22:19:52,419 | ERROR | django.server | "GET /login/?next=/backtest/ HTTP/1.1" 500 145
+2026-04-16 22:20:04,139 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 613, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:20:04,139 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 613, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:20:04,155 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-16 22:20:04,878 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 613, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:20:04,880 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 613, in login_view
+    return redirect("dashboard")
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
+2026-04-16 22:20:04,883 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145

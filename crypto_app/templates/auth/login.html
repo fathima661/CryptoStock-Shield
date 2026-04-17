@@ -67,9 +67,11 @@
 {% endblock %}
 
 {% block scripts %}
+{{ block.super }}
+
 <script>
 // ==========================
-// TOGGLE PASSWORD (shared function)
+// TOGGLE PASSWORD
 // ==========================
 function togglePassword(inputId, eyeId, eyeOffId) {
     const input = document.getElementById(inputId);

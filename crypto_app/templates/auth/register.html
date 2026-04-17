@@ -80,6 +80,7 @@
 {% endblock %}
 
 {% block scripts %}
+{{ block.super }}
 
 <script>
 
@@ -126,6 +127,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         const data = await response.json();
 
         if (data.success) {
+            
             window.location.href = data.redirect; 
         } else {
             errorBox.textContent = data.error || "Registration failed";

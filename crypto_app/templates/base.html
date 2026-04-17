@@ -12,24 +12,51 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* Flexbox Sticky Footer Logic */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            scroll-behavior: smooth; 
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
+
         main {
-            flex: 1; /* Pushes footer to bottom on short pages */
+            flex: 1;
         }
 
-        .gradient-bg { background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15), transparent), radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.15), transparent); }
-        .glass { backdrop-filter: blur(12px); background: rgba(31, 41, 55, 0.6); transition: all 0.3s ease; }
-        .glass:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
-        .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 1s ease forwards; }
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        .glow:hover { box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+        .gradient-bg {
+            background:
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15), transparent),
+                radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.15), transparent);
+        }
+
+        .glass {
+            backdrop-filter: blur(12px);
+            background: rgba(31, 41, 55, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .glass:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glow:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+        }
     </style>
 </head>
 
@@ -38,20 +65,23 @@
     <nav class="bg-[#0B1220]/90 backdrop-blur border-b border-gray-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
             <h1 class="font-semibold text-base sm:text-lg fade-in">CryptoStock Shield</h1>
-            
+
             <div class="hidden md:flex space-x-6 items-center">
                 <a href="/" class="{% if request.path == '/' %}text-blue-400{% else %}hover:text-blue-400{% endif %} transition">Home</a>
                 <a href="/#features" class="hover:text-blue-400 transition">Features</a>
+
                 {% if user.is_authenticated %}
                 <a href="{% url 'history' %}" class="hover:text-blue-400 transition">History</a>
                 {% endif %}
+
                 <a href="{% url 'backtest' %}" class="hover:text-blue-400 transition">Backtest</a>
                 <a href="/#about" class="hover:text-blue-400 transition">About</a>
+
                 <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 text-sm shadow-lg glow">
                     Start Scan
                 </a>
             </div>
-            
+
             <div class="flex items-center gap-3 relative">
                 {% if user.is_authenticated %}
                 <button onclick="openSidebar()" class="focus:outline-none flex items-center">
@@ -61,7 +91,9 @@
                 </button>
                 {% else %}
                 <button onclick="openAuth(); showLogin();" class="text-gray-300 hover:text-white transition">Login</button>
-                <button onclick="openAuth(); showRegister();" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition glow">Register</button>
+                <button onclick="openAuth(); showRegister();" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition glow">
+                    Register
+                </button>
                 {% endif %}
 
                 <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300">
@@ -151,121 +183,258 @@
 
     <div id="profileSidebar" class="fixed top-0 right-0 h-full w-full sm:w-80 bg-[#0B1220] border-l border-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
         <div class="flex items-center justify-between p-5 border-b border-gray-800">
-            <h2 class="text-lg font-semibold"> Profile</h2>
+            <h2 class="text-lg font-semibold">Profile</h2>
             <button onclick="closeSidebar()" class="text-gray-400 hover:text-white">✕</button>
         </div>
+
         <div class="p-5">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-lg font-bold">{{ user.email|first|upper }}</div>
+                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-lg font-bold">
+                    {{ user.email|first|upper }}
+                </div>
                 <div>
                     <p class="text-white text-sm">{{ user.email }}</p>
                     <p class="text-gray-400 text-xs">Active user</p>
                 </div>
             </div>
         </div>
+
         <div class="mt-auto w-full p-5 border-t border-gray-800 space-y-2">
-            <button onclick="deleteAccount()"
-                class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
+            <button onclick="deleteAccount()" class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
                 Delete Account
             </button>
 
             <form method="POST" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">Logout</button>
+                <button class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
+                    Logout
+                </button>
             </form>
         </div>
     </div>
+
     <div id="sidebarBackdrop" onclick="closeSidebar()" class="fixed inset-0 bg-black/50 hidden z-40"></div>
 
     <div id="authModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
         <div class="bg-[#0B1220] w-full max-w-md mx-4 sm:mx-auto rounded-xl shadow-xl border border-gray-700 p-5 sm:p-6 relative">
+
             <button onclick="closeAuth()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg">✕</button>
+
             <div class="flex mb-6 border-b border-gray-700">
                 <button onclick="showLogin()" id="loginTab" class="flex-1 py-2 text-blue-400 border-b-2 border-blue-400">Login</button>
                 <button onclick="showRegister()" id="registerTab" class="flex-1 py-2 text-gray-400">Register</button>
             </div>
-            <form id="loginForm" class="space-y-4">{% csrf_token %}</form>
-            <form id="registerForm" class="space-y-4 hidden">{% csrf_token %}</form>
+
+            <form id="loginForm" method="POST" action="{% url 'login' %}" class="space-y-4">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <input type="password" name="password" placeholder="Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                
+                <p id="loginError" class="text-red-400 text-sm hidden whitespace-pre-line"></p>
+
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg">Login</button>
+            </form>
+
+            <form id="registerForm" method="POST" action="{% url 'register' %}" class="space-y-4 hidden">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <input type="password" name="password1" placeholder="Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                <input type="password" name="password2" placeholder="Confirm Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
+                
+                <p id="registerError" class="text-red-400 text-sm hidden whitespace-pre-line"></p>
+
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg">Register</button>
+            </form>
         </div>
     </div>
 
     <script>
-        // Fix 5: Add toggle script
         function toggleMobileMenu() {
-            const menu = document.getElementById("mobileMenu");
-            menu.classList.toggle("hidden");
+            document.getElementById("mobileMenu").classList.toggle("hidden");
         }
 
-        function openSidebar(){
+        function openSidebar() {
             document.getElementById("profileSidebar").classList.remove("translate-x-full");
             document.getElementById("sidebarBackdrop").classList.remove("hidden");
         }
 
-        function closeSidebar(){
+        function closeSidebar() {
             document.getElementById("profileSidebar").classList.add("translate-x-full");
             document.getElementById("sidebarBackdrop").classList.add("hidden");
         }
 
-        function openAuth(){
+        function openAuth() {
             document.getElementById("authModal").classList.remove("hidden");
             document.getElementById("authModal").classList.add("flex");
         }
 
-        function closeAuth(){
+        function closeAuth() {
             document.getElementById("authModal").classList.add("hidden");
             document.getElementById("authModal").classList.remove("flex");
         }
 
-        function showLogin(){
+        function showLogin() {
             document.getElementById("loginForm").classList.remove("hidden");
             document.getElementById("registerForm").classList.add("hidden");
-            document.getElementById("loginTab").classList.add("text-blue-400","border-blue-400");
-            document.getElementById("registerTab").classList.remove("text-blue-400","border-blue-400");
+
+            document.getElementById("loginTab").classList.add("text-blue-400", "border-b-2", "border-blue-400");
+            document.getElementById("registerTab").classList.remove("text-blue-400", "border-b-2", "border-blue-400");
+            document.getElementById("registerTab").classList.add("text-gray-400");
         }
 
-        function showRegister(){
+        function showRegister() {
             document.getElementById("loginForm").classList.add("hidden");
             document.getElementById("registerForm").classList.remove("hidden");
-            document.getElementById("registerTab").classList.add("text-blue-400","border-blue-400");
-            document.getElementById("loginTab").classList.remove("text-blue-400","border-blue-400");
+
+            document.getElementById("registerTab").classList.add("text-blue-400", "border-b-2", "border-blue-400");
+            document.getElementById("loginTab").classList.remove("text-blue-400", "border-b-2", "border-blue-400");
+            document.getElementById("loginTab").classList.add("text-gray-400");
+        }
+
+        // Error Formatter JS
+        function formatErrors(errorData) {
+            try {
+                const errors = (typeof errorData === "string")
+                    ? JSON.parse(errorData)
+                    : errorData;
+
+                let messages = [];
+
+                for (let field in errors) {
+                    errors[field].forEach(e => {
+                        messages.push("• " + (e.message || e));
+                    });
+                }
+
+                return messages.join("\n");
+            } catch (err) {
+                return "• " + errorData;
+            }
         }
 
         async function deleteAccount() {
-            const confirmDelete = confirm(
-                "⚠️ Are you sure you want to delete your account?\nThis action cannot be undone."
-            );
+            if (!confirm("Are you sure you want to delete your account?")) return;
 
-            if (!confirmDelete) return;
+            const getCookie = (name) => {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            const response = await fetch("/delete-account/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie('csrftoken'),
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                alert(data.error || "Delete failed");
+            }
+        }
+    </script>
+
+    {% block scripts %}
+    <script>
+        // LOGIN FORM AJAX (SAFE VERSION)
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const err = document.getElementById("loginError");
+
+            err.classList.add("hidden");
+            err.innerText = "";
 
             try {
-                const response = await fetch("/delete-account/", {
+                const res = await fetch("{% url 'login' %}", {
                     method: "POST",
-                    credentials: "same-origin",
+                    body: formData,
                     headers: {
-                        "X-CSRFToken": getCSRFToken(),
                         "X-Requested-With": "XMLHttpRequest"
                     }
                 });
 
-                const data = await response.json();
+                const contentType = res.headers.get("content-type");
+                let data;
 
-                if (data.success) {
-                    alert("Account deleted successfully");
-                    window.location.href = data.redirect;
+                if (contentType && contentType.includes("application/json")) {
+                    data = await res.json();
                 } else {
-                    alert(data.error || "Delete failed");
+                    throw new Error("Server returned HTML instead of JSON");
                 }
 
-            } catch (err) {
-                console.error("Delete error:", err);
-                alert("Server error. Try again.");
-            }
-        }
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    err.innerText = formatErrors(data.error);
+                    err.classList.remove("hidden");
+                }
 
-        function getCSRFToken() {
-            return document.querySelector('[name=csrfmiddlewaretoken]')?.value;
-        }
+            } catch (error) {
+                console.error(error);
+                err.innerText = "• Server error. Please try again.";
+                err.classList.remove("hidden");
+            }
+        });
+
+        // REGISTER FORM AJAX (SAFE VERSION)
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const err = document.getElementById("registerError");
+
+            err.classList.add("hidden");
+            err.innerText = "";
+
+            try {
+                const res = await fetch("{% url 'register' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                });
+
+                const contentType = res.headers.get("content-type");
+                let data;
+
+                if (contentType && contentType.includes("application/json")) {
+                    data = await res.json();
+                } else {
+                    throw new Error("Server returned HTML instead of JSON");
+                }
+
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    err.innerText = formatErrors(data.error);
+                    err.classList.remove("hidden");
+                }
+
+            } catch (error) {
+                console.error(error);
+                err.innerText = "• Server error. Try again.";
+                err.classList.remove("hidden");
+            }
+        });
     </script>
-    {% block scripts %}{% endblock %}
+    {% endblock %}
 </body>
+
 </html>
