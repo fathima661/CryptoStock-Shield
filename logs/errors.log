@@ -5564,3 +5564,1060 @@ Traceback (most recent call last):
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'dashboard' not found. 'dashboard' is not a valid view function or pattern name.
 2026-04-16 22:20:04,883 | ERROR | django.server | "POST /login/ HTTP/1.1" 500 145
+2026-04-18 14:30:24,996 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:30:25,010 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:30:25,017 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:30:26,431 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:30:26,434 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:30:26,439 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:31:07,196 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:31:07,203 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:31:07,211 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:31:09,854 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:31:09,859 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", {
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:31:09,859 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:31:53,679 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:31:53,685 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:31:53,685 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:32:36,755 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:32:36,761 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:32:36,770 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:32:38,205 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:32:38,213 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:32:38,213 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:33:03,638 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:33:03,652 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:33:03,658 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:33:04,496 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:33:04,499 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:33:04,504 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:34:32,580 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:34:32,587 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:34:32,594 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 14:34:33,968 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:34:33,968 | ERROR | django.request | Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 71, in home
+    return render(request, "home.html", )
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 164, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 1018, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile' not found. 'profile' is not a valid view function or pattern name.
+2026-04-18 14:34:33,976 | ERROR | django.server | "GET / HTTP/1.1" 500 145
+2026-04-18 20:00:18,459 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: home() got an unexpected keyword argument 'auth_mode'
+2026-04-18 20:00:18,473 | ERROR | django.request | Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: home() got an unexpected keyword argument 'auth_mode'
+2026-04-18 20:00:18,480 | ERROR | django.server | "GET /login/ HTTP/1.1" 500 145
+2026-04-18 21:12:55,916 | ERROR | crypto_app.views | Scan crashed
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\crypto_app\views.py", line 273, in scan
+    symbol=resolved_asset.symbol,
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\services\feature_builder.py", line 41, in build_features_from_history
+    raise ValueError("Not enough history")
+ValueError: Not enough history
+2026-04-18 21:19:05,574 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:19:17,330 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:19:26,057 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:19:36,052 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:19:46,052 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:19:56,056 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:20:06,061 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:20:16,056 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:21:00,073 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404
+2026-04-18 21:21:27,100 | ERROR | crypto_app.middleware | Unhandled Exception
+Traceback (most recent call last):
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\views\decorators\common.py", line 23, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\fathi\CRYPTOSTOCK-ML\crypto_project\venv\lib\site-packages\django\contrib\admin\sites.py", line 467, in catch_all_view
+    raise Http404
+django.http.response.Http404

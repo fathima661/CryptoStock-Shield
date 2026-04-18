@@ -34,7 +34,9 @@ from django.utils.http import (urlsafe_base64_encode, urlsafe_base64_decode)
 from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import render_to_string
-from django.shortcuts import redirect
+from django.core.paginator import Paginator
+
+ 
 
 # ==========================================
 # LOCAL APP IMPORTS
@@ -66,8 +68,8 @@ logger = logging.getLogger(__name__)
 # ==========================================
 # BASIC PAGES
 # ==========================================
-def home(request):
-    return render(request, "home.html")
+def home(request,auth_mode=None):
+    return render(request,"home.html",{"auth_mode": auth_mode})
 
 
 def about(request):
@@ -228,7 +230,12 @@ def scan(request):
         if form.is_valid():
             if not request.user.is_authenticated and free_scans >= 1:
                 messages.warning(request, "Please login to continue scanning.")
-                return redirect(f"{reverse('login')}?next=/scan/")
+                form = ScanForm(request.POST, request.FILES)
+                return render(request, "scan.html",{
+                    "form": form,
+                    "show_login_popup": True,
+                    "old_input": request.POST
+                })
 
             scan_obj = None
 
@@ -597,12 +604,13 @@ def results(request, scan_id):
 # ==========================================
 # AUTH
 # ==========================================
-
 def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
-
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+        # ✅ GET NEXT URL
+        next_url = request.POST.get("next") or "/"
 
         if form.is_valid():
             email = form.cleaned_data.get("email")
@@ -613,17 +621,14 @@ def login_view(request):
             if user is not None:
                 login(request, user)
 
-                # ✅ AJAX RESPONSE
                 if is_ajax:
                     return JsonResponse({
                         "success": True,
-                        "redirect": "/"
+                        "redirect": next_url
                     })
 
-                # ✅ NORMAL REQUEST
-                return redirect("/")
+                return redirect(next_url)
 
-            # ❌ INVALID LOGIN
             if is_ajax:
                 return JsonResponse({
                     "success": False,
@@ -632,7 +637,6 @@ def login_view(request):
 
             return redirect("/")
 
-        # ❌ FORM INVALID
         if is_ajax:
             return JsonResponse({
                 "success": False,
@@ -652,8 +656,10 @@ def logout_view(request):
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
-
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+        # ✅ GET NEXT URL
+        next_url = request.POST.get("next") or "/"
 
         if form.is_valid():
             user = form.save()
@@ -662,10 +668,10 @@ def register_view(request):
             if is_ajax:
                 return JsonResponse({
                     "success": True,
-                    "redirect": "/"
+                    "redirect": next_url
                 })
 
-            return redirect("/")
+            return redirect(next_url)
 
         if is_ajax:
             return JsonResponse({
@@ -732,7 +738,7 @@ def download_report(request, scan_id):
 # ==========================================
 # HISTORY PAGE
 # ==========================================
-@login_required
+@login_required(login_url='/')
 def history(request):
     from django.db.models import F, Q, Count
     from django.db.models.functions import TruncDate
@@ -1479,3 +1485,81 @@ def backtest_view(request):
         "chart_data": chart_data,
         "metrics": metrics
     })
+
+#-------------------------------------------------------ADMIN---------------------------------------------------
+
+from functools import wraps
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import get_user_model
+from datetime import date
+from .models import Scan
+from django.views.decorators.http import require_POST
+from django.core.cache import cache
+from django.utils import timezone
+
+
+User = get_user_model()
+
+def admin_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated or not request.user.is_superuser:
+            return redirect("/")
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
+
+
+@login_required
+@admin_required
+def admin_dashboard(request):
+
+    cached = cache.get("admin_dashboard_data")
+
+    if cached:
+        return render(request, "admin/dashboard.html", cached)
+
+    context = {
+        "total_users": User.objects.count(),
+        "total_scans": Scan.objects.count(),
+        "today_scans": Scan.objects.filter(created_at__date=date.today()).count(),
+        "active_users": User.objects.filter(is_active=True).count(),
+
+        "recent_scans": Scan.objects.select_related("user", "asset")
+                                    .order_by("-created_at")[:20],
+    }
+
+    cache.set("admin_dashboard_data", context, 60)  # 60 sec cache
+
+    return render(request, "admin/dashboard.html", context)
+
+
+@login_required
+@admin_required
+def admin_users(request):
+    users = User.objects.all().order_by("-date_joined")
+    return render(request, "admin/users.html", {"users": users})
+
+
+@login_required
+@admin_required
+def admin_scans(request):
+    scans = Scan.objects.select_related("user", "asset").order_by("-created_at")[:50]
+    return render(request, "admin/scans.html", {"scans": scans})
+
+
+@login_required
+@admin_required
+@require_POST
+def delete_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    # Prevent deleting superuser
+    if user.is_superuser:
+        return redirect("admin_users")
+
+    user.delete()
+    return redirect("admin_users")
+
+ 

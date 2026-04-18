@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 py-10">
+
+    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-8">
+        Admin Dashboard
+    </h2>
+
+    <!-- STATS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10">
+        <div class="bg-[#111827] p-4 sm:p-6 rounded-xl">
+            <p class="text-gray-400 text-xs sm:text-sm">Total Users</p>
+            <h3 class="text-xl sm:text-2xl text-white font-bold">{{ total_users }}</h3>
+        </div>
+
+        <div class="bg-[#111827] p-4 sm:p-6 rounded-xl">
+            <p class="text-gray-400 text-xs sm:text-sm">Total Scans</p>
+            <h3 class="text-xl sm:text-2xl text-white font-bold">{{ total_scans }}</h3>
+        </div>
+
+        <div class="bg-[#111827] p-4 sm:p-6 rounded-xl">
+            <p class="text-gray-400 text-xs sm:text-sm">Today's Scans</p>
+            <h3 class="text-xl sm:text-2xl text-white font-bold">{{ today_scans }}</h3>
+        </div>
+
+        <div class="bg-[#111827] p-4 sm:p-6 rounded-xl">
+            <p class="text-gray-400 text-xs sm:text-sm">Active Users</p>
+            <h3 class="text-xl sm:text-2xl text-white font-bold">{{ active_users }}</h3>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="flex flex-wrap gap-3 mb-8">
+        <a href="{% url 'admin_users' %}"
+           class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded text-sm font-semibold transition">
+            Users
+        </a>
+
+        <a href="{% url 'admin_scans' %}"
+           class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-sm font-semibold transition">
+            Scans
+        </a>
+    </div>
+
+    <!-- RECENT SCANS -->
+    <div class="bg-[#111827] p-4 sm:p-6 rounded-xl">
+
+        <h3 class="text-white mb-4 font-semibold">Recent Scans</h3>
+
+        <!-- DESKTOP TABLE -->
+        <div class="hidden md:block overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="text-gray-400 border-b border-gray-700">
+                    <tr>
+                        <th class="py-2">User</th>
+                        <th class="py-2">Asset</th>
+                        <th class="py-2">Date</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-gray-300">
+                    {% for scan in recent_scans %}
+                    <tr class="border-t border-gray-800">
+                        <td class="py-2">{{ scan.user.email }}</td>
+                        <td class="py-2">{{ scan.asset.symbol }}</td>
+                        <td class="py-2">
+                            {{ scan.created_at|date:"Y-m-d H:i" }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MOBILE CARD VIEW -->
+        <div class="md:hidden space-y-3">
+            {% for scan in recent_scans %}
+            <div class="p-4 rounded-lg border border-gray-800 bg-black/20">
+                <div class="flex justify-between items-center">
+                    <p class="text-white font-semibold text-sm">
+                        {{ scan.user.email }}
+                    </p>
+                    <span class="text-xs text-blue-400">
+                        {{ scan.asset.symbol }}
+                    </span>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-1">
+                    {{ scan.created_at|date:"Y-m-d H:i" }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

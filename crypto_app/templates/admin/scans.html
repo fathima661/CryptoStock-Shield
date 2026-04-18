@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% block title %}Admin Scans{% endblock %}
+
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 py-10">
+
+    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6">
+        Scans Management
+    </h2>
+
+    <!-- FILTER BAR -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+
+        <select id="searchUser"
+                class="bg-[#111827] text-white p-2 rounded border border-gray-800 text-sm">
+
+            <option value="">All Users</option>
+
+        </select>
+
+        <select id="filterStatus"
+                class="bg-[#111827] text-white p-2 rounded border border-gray-800 text-sm">
+            <option value="">All Status</option>
+            <option value="completed">Completed</option>
+            <option value="failed">Failed</option>
+            <option value="processing">Processing</option>
+        </select>
+
+        <select id="filterAsset"
+                class="bg-[#111827] text-white p-2 rounded border border-gray-800 text-sm">
+
+            <option value="">All Assets</option>
+            <option value="crypto">All Crypto</option>
+            <option value="stock">All Stocks</option>
+
+            <optgroup label="Crypto">
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
+                <option value="BNB">BNB</option>
+                <option value="XRP">XRP</option>
+                <option value="ADA">ADA</option>
+                <option value="DOGE">DOGE</option>
+                <option value="SOL">SOL</option>
+                <option value="MATIC">MATIC</option>
+                <option value="DOT">DOT</option>
+                <option value="LTC">LTC</option>
+            </optgroup>
+
+            <optgroup label="Stocks">
+                <option value="RELIANCE.NS">Reliance</option>
+                <option value="TCS.NS">TCS</option>
+                <option value="INFY.NS">Infosys</option>
+                <option value="HDFCBANK.NS">HDFC Bank</option>
+                <option value="ICICIBANK.NS">ICICI Bank</option>
+            </optgroup>
+
+        </select>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="hidden md:block bg-[#111827] rounded-xl border border-gray-800 overflow-x-auto">
+
+        <table class="w-full text-sm">
+            <thead class="text-gray-400 border-b border-gray-700">
+                <tr>
+                    <th class="p-3 text-left">User</th>
+                    <th class="p-3 text-left">Asset</th>
+                    <th class="p-3 text-left">Status</th>
+                    <th class="p-3 text-left">Date</th>
+                </tr>
+            </thead>
+
+            <tbody id="scanTable" class="text-gray-300">
+
+                {% for scan in scans %}
+                <tr class="border-t border-gray-800 scan-row">
+
+                    <td class="p-3 user-cell break-all leading-tight">
+                        {{ scan.user.email }}
+                    </td>
+
+                    <td class="p-3 asset-cell font-semibold">
+                        {{ scan.asset.symbol }}
+                    </td>
+
+                    <td class="p-3 status-cell">
+                        {{ scan.status }}
+                    </td>
+
+                    <td class="p-3 text-gray-400">
+                        {{ scan.created_at }}
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="flex justify-center items-center gap-3 mt-6 text-sm text-white">
+
+        <button id="prevPage"
+                class="px-3 py-1 bg-gray-800 rounded disabled:opacity-40">
+            Prev
+        </button>
+
+        <span id="pageInfo"></span>
+
+        <button id="nextPage"
+                class="px-3 py-1 bg-gray-800 rounded disabled:opacity-40">
+            Next
+        </button>
+
+    </div>
+
+</section>
+
+<script>
+const searchUser = document.getElementById("searchUser");
+const filterAsset = document.getElementById("filterAsset");
+const filterStatus = document.getElementById("filterStatus");
+
+const rows = Array.from(document.querySelectorAll(".scan-row"));
+
+/* =========================
+   UNIQUE USER DROPDOWN
+========================= */
+const seen = new Set();
+rows.forEach(row => {
+    const email = row.querySelector(".user-cell").innerText.trim();
+    if (!seen.has(email)) {
+        seen.add(email);
+
+        const opt = document.createElement("option");
+        opt.value = email;
+        opt.innerText = email;
+        searchUser.appendChild(opt);
+    }
+});
+
+/* =========================
+   PAGINATION STATE
+========================= */
+let currentPage = 1;
+const perPage = 10;
+
+function getFilteredRows() {
+
+    const userVal = searchUser.value.toLowerCase();
+    const assetVal = filterAsset.value.toLowerCase();
+    const statusVal = filterStatus.value.toLowerCase();
+
+    return rows.filter(row => {
+
+        const user = row.querySelector(".user-cell").innerText.toLowerCase();
+        const asset = row.querySelector(".asset-cell").innerText.toLowerCase();
+        const status = row.querySelector(".status-cell").innerText.toLowerCase();
+
+        const matchUser = !userVal || user.includes(userVal);
+
+        const matchAsset =
+            !assetVal ||
+            asset.includes(assetVal) ||
+            (assetVal === "crypto" && ["btc","eth","bnb","xrp","ada","doge","sol","matic","dot","ltc"].some(c => asset.includes(c))) ||
+            (assetVal === "stock" && asset.includes(".ns"));
+
+        const matchStatus = !statusVal || status.includes(statusVal);
+
+        return matchUser && matchAsset && matchStatus;
+    });
+}
+
+/* =========================
+   RENDER TABLE + PAGINATION
+========================= */
+function render() {
+
+    const filtered = getFilteredRows();
+    const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+
+    if (currentPage > totalPages) currentPage = 1;
+
+    rows.forEach(r => r.style.display = "none");
+
+    const start = (currentPage - 1) * perPage;
+    const end = start + perPage;
+
+    filtered.slice(start, end).forEach(r => {
+        r.style.display = "";
+    });
+
+    document.getElementById("pageInfo").innerText =
+        `${currentPage} / ${totalPages}`;
+
+    document.getElementById("prevPage").disabled = currentPage === 1;
+    document.getElementById("nextPage").disabled = currentPage === totalPages;
+}
+
+/* =========================
+   EVENTS (DEBOUNCED FILTER)
+========================= */
+let timeout;
+
+function triggerUpdate() {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        currentPage = 1;
+        render();
+    }, 200);
+}
+
+searchUser.addEventListener("change", triggerUpdate);
+filterAsset.addEventListener("change", triggerUpdate);
+filterStatus.addEventListener("change", triggerUpdate);
+
+document.getElementById("prevPage").onclick = () => {
+    if (currentPage > 1) currentPage--;
+    render();
+};
+
+document.getElementById("nextPage").onclick = () => {
+    currentPage++;
+    render();
+};
+
+/* INIT */
+render();
+</script>
+
+{% endblock %}

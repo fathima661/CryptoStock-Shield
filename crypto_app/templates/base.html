@@ -57,6 +57,11 @@
         .glow:hover {
             box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
         }
+
+        /* Mobile menu smooth animation */
+        #mobileMenu {
+            transition: all 0.2s ease;
+        }
     </style>
 </head>
 
@@ -71,7 +76,7 @@
                 <a href="/#features" class="hover:text-blue-400 transition">Features</a>
 
                 {% if user.is_authenticated %}
-                <a href="{% url 'history' %}" class="hover:text-blue-400 transition">History</a>
+                    <a href="{% url 'history' %}" class="hover:text-blue-400 transition">History</a>
                 {% endif %}
 
                 <a href="{% url 'backtest' %}" class="hover:text-blue-400 transition">Backtest</a>
@@ -80,9 +85,15 @@
                 <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 text-sm shadow-lg glow">
                     Start Scan
                 </a>
+                {% if user.is_superuser %}
+                    <a href="{% url 'admin_dashboard' %}" 
+                        class="bg-yellow-500 px-4 py-2 rounded-lg hover:bg-yellow-600 text-sm shadow-lg text-black">
+                         Admin Panel
+                    </a>
+                {% endif %}
             </div>
 
-            <div class="flex items-center gap-3 relative">
+            <div class="flex items-center gap-2 sm:gap-3 relative">
                 {% if user.is_authenticated %}
                 <button onclick="openSidebar()" class="focus:outline-none flex items-center">
                     <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold">
@@ -96,7 +107,7 @@
                 </button>
                 {% endif %}
 
-                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300">
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 ml-1">
                     ☰
                 </button>
             </div>
@@ -108,7 +119,7 @@
         <a href="/#features" class="block">Features</a>
 
         {% if user.is_authenticated %}
-        <a href="{% url 'history' %}" class="block">History</a>
+            <a href="{% url 'history' %}" class="block">History</a>    
         {% endif %}
 
         <a href="{% url 'backtest' %}" class="block">Backtest</a>
@@ -117,6 +128,9 @@
         <a href="{% url 'scan' %}" class="block bg-blue-500 px-4 py-2 rounded-lg text-center">
             Start Scan
         </a>
+        {% if user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}" class="block text-yellow-400">Admin Panel</a>
+        {% endif %}
     </div>
 
     <main>
@@ -144,18 +158,18 @@
             <div id="github">
                 <h3 class="text-white text-lg mb-3">GitHub</h3>
                 <p>View source code and contribute to the project.</p>
-                <a href="#" class="text-blue-400 hover:underline">Coming Soon</a>
+                <a href="https://github.com/fathima661/CryptoStock-Shield" class="text-blue-400 hover:underline"> Open GitHub Repository</a>
             </div>
             <div id="docs">
                 <h3 class="text-white text-lg mb-3">Documentation</h3>
                 <p>Learn how the model works, APIs, and integration details.</p>
-                <a href="#" class="text-blue-400 hover:underline">Coming Soon</a>
+                <a href="https://github.com/fathima661/CryptoStock-Shield#readme" class="text-blue-400 hover:underline"> Read Documentation</a>
             </div>
         </div>
     </section>
 
     <footer class="border-t border-gray-700 py-10 text-sm text-gray-400 bg-[#0B1220]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <div>
                 <h4 class="text-white mb-2">Product</h4>
                 <a href="{% url 'scan' %}" class="block hover:text-white">Scan</a>
@@ -178,10 +192,10 @@
                 <a href="/#docs" class="block hover:text-white">Documentation</a>
             </div>
         </div>
-        <p class="text-center mt-6 text-gray-600">© 2026 CryptoStock Shield</p>
+        <p class="text-center mt-6 text-gray-600">© 2025 CryptoStock Shield</p>
     </footer>
 
-    <div id="profileSidebar" class="fixed top-0 right-0 h-full w-full sm:w-80 bg-[#0B1220] border-l border-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+    <div id="profileSidebar" class="fixed top-0 right-0 h-full w-full sm:w-80 max-w-sm bg-[#0B1220] border-l border-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
         <div class="flex items-center justify-between p-5 border-b border-gray-800">
             <h2 class="text-lg font-semibold">Profile</h2>
             <button onclick="closeSidebar()" class="text-gray-400 hover:text-white">✕</button>
@@ -200,6 +214,13 @@
         </div>
 
         <div class="mt-auto w-full p-5 border-t border-gray-800 space-y-2">
+            {% if user.is_superuser %}
+                <a href="{% url 'admin_dashboard' %}" 
+                   class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 py-2 rounded-lg text-sm text-black">
+                    Admin Dashboard
+                </a>
+            {% endif %}
+
             <button onclick="deleteAccount()" class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
                 Delete Account
             </button>
@@ -215,8 +236,8 @@
 
     <div id="sidebarBackdrop" onclick="closeSidebar()" class="fixed inset-0 bg-black/50 hidden z-40"></div>
 
-    <div id="authModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
-        <div class="bg-[#0B1220] w-full max-w-md mx-4 sm:mx-auto rounded-xl shadow-xl border border-gray-700 p-5 sm:p-6 relative">
+    <div id="authModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 overflow-y-auto">
+        <div class="bg-[#0B1220] w-full max-w-md mx-3 sm:mx-auto rounded-xl shadow-xl border border-gray-700 p-5 sm:p-6 relative">
 
             <button onclick="closeAuth()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg">✕</button>
 
@@ -227,6 +248,7 @@
 
             <form id="loginForm" method="POST" action="{% url 'login' %}" class="space-y-4">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
                 <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
                 <input type="password" name="password" placeholder="Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
                 
@@ -237,6 +259,7 @@
 
             <form id="registerForm" method="POST" action="{% url 'register' %}" class="space-y-4 hidden">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
                 <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
                 <input type="password" name="password1" placeholder="Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
                 <input type="password" name="password2" placeholder="Confirm Password" class="w-full p-3 rounded bg-[#0b1220] border border-gray-600 text-gray-200">
@@ -291,7 +314,6 @@
             document.getElementById("loginTab").classList.add("text-gray-400");
         }
 
-        // Error Formatter JS
         function formatErrors(errorData) {
             try {
                 const errors = (typeof errorData === "string")
@@ -346,17 +368,26 @@
                 alert(data.error || "Delete failed");
             }
         }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.get("next")) {
+                openAuth();
+                showLogin();
+            }
+        });
     </script>
 
     {% block scripts %}
     <script>
-        // LOGIN FORM AJAX (SAFE VERSION)
+        // ✅ LOGIN JS
         document.getElementById("loginForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
             const formData = new FormData(this);
-            const err = document.getElementById("loginError");
 
+            const err = document.getElementById("loginError");
             err.classList.add("hidden");
             err.innerText = "";
 
@@ -364,19 +395,10 @@
                 const res = await fetch("{% url 'login' %}", {
                     method: "POST",
                     body: formData,
-                    headers: {
-                        "X-Requested-With": "XMLHttpRequest"
-                    }
+                    headers: { "X-Requested-With": "XMLHttpRequest" }
                 });
 
-                const contentType = res.headers.get("content-type");
-                let data;
-
-                if (contentType && contentType.includes("application/json")) {
-                    data = await res.json();
-                } else {
-                    throw new Error("Server returned HTML instead of JSON");
-                }
+                const data = await res.json();
 
                 if (data.success) {
                     window.location.href = data.redirect;
@@ -384,21 +406,19 @@
                     err.innerText = formatErrors(data.error);
                     err.classList.remove("hidden");
                 }
-
             } catch (error) {
-                console.error(error);
                 err.innerText = "• Server error. Please try again.";
                 err.classList.remove("hidden");
             }
         });
 
-        // REGISTER FORM AJAX (SAFE VERSION)
+        // ✅ REGISTER JS
         document.getElementById("registerForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
             const formData = new FormData(this);
-            const err = document.getElementById("registerError");
 
+            const err = document.getElementById("registerError");
             err.classList.add("hidden");
             err.innerText = "";
 
@@ -406,19 +426,10 @@
                 const res = await fetch("{% url 'register' %}", {
                     method: "POST",
                     body: formData,
-                    headers: {
-                        "X-Requested-With": "XMLHttpRequest"
-                    }
+                    headers: { "X-Requested-With": "XMLHttpRequest" }
                 });
 
-                const contentType = res.headers.get("content-type");
-                let data;
-
-                if (contentType && contentType.includes("application/json")) {
-                    data = await res.json();
-                } else {
-                    throw new Error("Server returned HTML instead of JSON");
-                }
+                const data = await res.json();
 
                 if (data.success) {
                     window.location.href = data.redirect;
@@ -426,9 +437,7 @@
                     err.innerText = formatErrors(data.error);
                     err.classList.remove("hidden");
                 }
-
             } catch (error) {
-                console.error(error);
                 err.innerText = "• Server error. Try again.";
                 err.classList.remove("hidden");
             }

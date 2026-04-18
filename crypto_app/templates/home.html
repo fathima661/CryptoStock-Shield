@@ -169,10 +169,7 @@
         /* RESPONSIVE FIXES */
         @media (max-width: 640px) {
             .risk-ring {
-                width: 50px;
-                height: 50px;
-                top: 10px;
-                right: 10px;
+                display: none;
             }
         }
 
@@ -184,10 +181,10 @@
     </style>
 </head>
 
-<body class="bg-[#0B1220] text-gray-200 gradient-bg pb-24">
+<body class="bg-[#0B1220] text-gray-200 gradient-bg pb-32">
 
     <nav class="bg-[#0B1220]/90 backdrop-blur border-b border-gray-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
 
             <div class="flex items-center gap-4">
                 <div class="md:hidden">
@@ -208,6 +205,12 @@
                 <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 text-sm shadow-lg glow">
                     Start Scan
                 </a>
+                {% if user.is_superuser %}
+                   <a href="{% url 'admin_dashboard' %}" 
+                       class="bg-yellow-500 px-4 py-2 rounded-lg hover:bg-yellow-600 text-sm shadow-lg text-black">
+                        Admin Panel
+                    </a>
+                {% endif %}
             </div>
 
             <div class="flex items-center gap-3 relative">
@@ -230,7 +233,7 @@
                 </div>
                 {% else %}
                 <button onclick="openAuth(); showLogin();" class="text-gray-300 hover:text-white transition">Login</button>
-                <button onclick="openAuth(); showRegister();" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition glow">
+                <button onclick="openAuth(); showRegister();" class="bg-blue-500 px-5 py-3 rounded-lg hover:bg-blue-600 transition glow">
                     Register
                 </button>
                 {% endif %}
@@ -238,18 +241,27 @@
         </div>
     </nav>
 
-    <div id="mobileMenu" class="hidden flex-col px-6 pb-4 space-y-3 md:hidden bg-[#0B1220] border-b border-gray-800">
+    <div id="mobileMenu" class="hidden flex-col px-4 pb-4 space-y-3 md:hidden bg-[#0B1220] border-b border-gray-800">
         <a href="/" class="block py-2">Home</a>
         <a href="#features" class="block py-2">Features</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'history' %}" class="block">History</a>    
+        {% endif %}
+
         <a href="{% url 'backtest' %}" class="block py-2">Backtest</a>
         <a href="#about" class="block py-2">About</a>
         <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg inline-block w-fit">Start Scan</a>
+
+        {% if user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}" class="block text-yellow-400">Admin Panel</a>
+        {% endif %}
     </div>
 
-    <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
 
         <div class="fade-in">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 leading-tight">
                 Detect Market Manipulation Before It Impacts Price
             </h1>
 
@@ -307,7 +319,7 @@
                 Expected Movement: <span class="text-yellow-400">2–6 hours</span>
             </div>
 
-            <div class="h-40 mt-6">
+            <div class="h-40 sm:h-48 mt-6">
                 <canvas id="riskChart"></canvas>
             </div>
 
@@ -454,7 +466,7 @@
                 <p>
                     View source code and contribute to the project.
                 </p>
-                <a href="#" class="text-blue-400 hover:underline">Coming Soon</a>
+                <a href="https://github.com/fathima661/CryptoStock-Shield" class="text-blue-400 hover:underline"> Open GitHub Repository</a>
             </div>
 
             <div id="docs">
@@ -462,7 +474,7 @@
                 <p>
                     Learn how the model works, APIs, and integration details.
                 </p>
-                <a href="#" class="text-blue-400 hover:underline">Coming Soon</a>
+                <a href="https://github.com/fathima661/CryptoStock-Shield#readme" class="text-blue-400 hover:underline">Read Documentation</a>
             </div>
 
         </div>
@@ -500,12 +512,12 @@
 
         </div>
 
-        <p class="text-center mt-6 text-gray-600">© 2026 CryptoStock Shield</p>
+        <p class="text-center mt-6 text-gray-600">© 2025 CryptoStock Shield</p>
 
     </footer>
 
     <div id="authModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
-        <div class="bg-[#0B1220] w-full max-w-md mx-4 rounded-xl shadow-xl border border-gray-700 p-6 relative">
+        <div class="bg-[#0B1220] w-full max-w-md mx-3 sm:mx-4 rounded-xl shadow-xl border border-gray-700 p-6 relative">
             <button onclick="closeAuth()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg">✕</button>
 
             <div class="flex mb-6 border-b border-gray-700">
@@ -626,6 +638,7 @@
             e.preventDefault();
 
             const formData = new FormData(this);
+            
             const err = document.getElementById("loginError");
 
             err.classList.add("hidden");
@@ -677,6 +690,7 @@
 
             try {
                 const formData = new FormData(this);
+                
 
                 const response = await fetch("{% url 'register' %}", {
                     method: "POST",
@@ -692,7 +706,6 @@
                 if (data.success) {
                     window.location.href = data.redirect;
                 } else {
-                    // ✅ USE FORMATTER HERE
                     errorBox.innerText = formatErrors(data.error);
                     errorBox.classList.remove("hidden");
                 }
@@ -726,6 +739,11 @@
         function closeAuth() {
             document.getElementById("authModal").classList.add("hidden");
             document.getElementById("authModal").classList.remove("flex");
+
+            // Remove ?next parameter from URL
+            const url = new URL(window.location);
+            url.searchParams.delete('next');
+            window.history.replaceState({}, document.title, url);
         }
 
         function showLogin() {
@@ -793,6 +811,26 @@
                 scales: { x: { display: false }, y: { display: false } }
             }
         });
+
+        // ==========================================
+        // AUTO OPEN LOGIN IF REDIRECTED FROM HISTORY
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nextParam = urlParams.get('next');
+
+            if (nextParam && nextParam.includes('history')) {
+                openAuth();
+                showLogin();
+
+                const loginError = document.getElementById("loginError");
+                if (loginError) {
+                    loginError.innerText = "• Please login to view your scan history.";
+                    loginError.classList.remove("hidden");
+                    loginError.classList.replace("text-red-400", "text-blue-400");
+                }
+            }
+        });
     </script>
 
     <div id="profileSidebar"
@@ -813,6 +851,12 @@
             </div>
         </div>
         <div class="mt-auto w-full p-5 border-t border-gray-800 space-y-2">
+            {% if user.is_superuser %}
+                <a href="{% url 'admin_dashboard' %}" 
+                   class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 py-2 rounded-lg text-sm text-black">
+                    Admin Dashboard
+                </a>
+            {% endif %}
             <button onclick="deleteAccount()" class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
                 Delete Account
             </button>

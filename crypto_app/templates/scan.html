@@ -6,141 +6,160 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div id="processingUI" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center backdrop-blur-sm">
-    <div class="bg-gray-900 p-6 sm:p-8 mx-4 rounded-2xl border border-gray-700 max-w-sm w-full text-center">
+    <div class="bg-gray-900 p-6 sm:p-8 mx-4 rounded-2xl border border-gray-700 max-w-sm w-full text-center break-words">
         <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
         <h3 class="text-xl font-bold text-white mb-4">AI Analysis in Progress</h3>
         <div id="steps" class="space-y-2 text-left text-gray-400"></div>
     </div>
 </div>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
 
-    <div>
-        <div class="mb-8">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-white">AI Market Scanner</h2>
-            <p class="text-gray-400 text-sm">
-                Detect manipulation risk using ML + Graph AI models
-            </p>
+    {% if messages %}
+    <div class="mb-8 space-y-3">
+        {% for message in messages %}
+        <div class="p-4 rounded-xl border
+            {% if message.tags == 'error' %}
+                bg-red-500/20 text-red-400 border-red-500/50
+            {% elif message.tags == 'success' %}
+                bg-green-500/20 text-green-400 border-green-500/50
+            {% else %}
+                bg-blue-500/20 text-blue-400 border-blue-500/50
+            {% endif %}">
+            {{ message }}
         </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-        <form method="POST" enctype="multipart/form-data" id="scanForm"
-              class="bg-[#111827] p-4 sm:p-6 rounded-2xl border border-gray-700 space-y-6 shadow-xl">
-
-            {% csrf_token %}
-
-            <input type="hidden" name="input_type" id="inputType" value="ticker">
-
-            <div>
-                <label class="block text-sm text-gray-400 mb-2 break-words">Select Market</label>
-                <select name="market_type" id="marketSelect" required
-                        class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
-                    <option value="" selected disabled>Select Market First</option>
-                    <option value="crypto">Crypto</option>
-                    <option value="stock">Stock</option>
-                </select>
-                <p class="text-xs text-gray-500 mt-2">
-                    Please choose Crypto or Stock before scanning
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+        <div>
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-white">AI Market Scanner</h2>
+                <p class="text-gray-400 text-sm">
+                    Detect manipulation risk using ML + Graph AI models
                 </p>
             </div>
 
-            <div>
-                <label class="block text-sm text-gray-400 mb-2 break-words">Input Method</label>
-                <div class="grid grid-cols-3 gap-2 sm:gap-3">
-                    <div class="tab-btn active-tab" data-type="ticker">Ticker</div>
-                    <div class="tab-btn" data-type="csv">CSV</div>
-                    <div class="tab-btn" data-type="social">Social</div>
+            <form method="POST" enctype="multipart/form-data" id="scanForm"
+                  class="bg-[#111827] p-4 sm:p-6 lg:p-7 rounded-2xl border border-gray-700 space-y-6 shadow-xl">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="input_type" id="inputType" value="ticker">
+
+                <div>
+                    <label class="block text-sm text-gray-400 mb-2 break-words">Select Market</label>
+                    <select name="market_type" id="marketSelect" required
+                            class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
+                        <option value="" selected disabled>Select Market First</option>
+                        <option value="crypto">Crypto</option>
+                        <option value="stock">Stock</option>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-2">
+                        Please choose Crypto or Stock before scanning
+                    </p>
+                </div>
+
+                <div>
+                    <label class="block text-sm text-gray-400 mb-2 break-words">Input Method</label>
+                    <div class="grid grid-cols-3 gap-2 sm:gap-3 text-xs sm:text-sm">
+                        <div class="tab-btn active-tab" data-type="ticker">Ticker</div>
+                        <div class="tab-btn" data-type="csv">CSV</div>
+                        <div class="tab-btn" data-type="social">Social</div>
+                    </div>
+                </div>
+
+                <div id="tickerInput" class="space-y-2">
+                    <label class="block text-sm text-gray-400 break-words">Select Asset</label>
+                    <select name="ticker_input" id="tickerSelect" class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
+                        <option value="">Select Asset</option>
+                    
+                        <optgroup label="Crypto" id="group-crypto">
+                            <option value="BTC">Bitcoin</option>
+                            <option value="ETH">Ethereum</option>
+                            <option value="BNB">BNB</option>
+                            <option value="XRP">XRP</option>
+                            <option value="ADA">ADA</option>
+                            <option value="DOGE">DOGE</option>
+                            <option value="SOL">SOL</option>
+                            <option value="MATIC">MATIC</option>
+                            <option value="DOT">DOT</option>
+                            <option value="LTC">LTC</option>
+                        </optgroup>
+                    
+                        <optgroup label="Stocks (India)" id="group-stock">
+                            <option value="RELIANCE.NS">Reliance</option>
+                            <option value="TCS.NS">TCS</option>
+                            <option value="INFY.NS">Infosys</option>
+                            <option value="HDFCBANK.NS">HDFC Bank</option>
+                            <option value="ICICIBANK.NS">ICICI Bank</option>
+                        </optgroup>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">
+                        Choose an asset for instant AI analysis
+                    </p>
+                </div>
+
+                <div id="csvInput" class="hidden space-y-2">
+                    <label class="block text-sm text-gray-400 break-words">Upload CSV</label>
+                    <input type="file" name="csv_file" id="id_csv_file" accept=".csv"
+                           class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
+                    <p class="text-xs text-gray-500 mt-2">Upload price + volume CSV</p>
+                </div>
+
+                <div id="socialInput" class="hidden space-y-2">
+                    <label class="block text-sm text-gray-400 break-words">Social Signal (Link or Text)</label>
+                    <textarea name="social_link" id="id_social_link" placeholder="Paste Telegram/Reddit signal or link"
+                              class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2 min-h-[120px] sm:min-h-[140px]"></textarea>
+                    <p class="text-xs text-gray-500">
+                        Example: Paste text from a Twitter or Reddit post
+                    </p>
+                </div>
+
+                <button id="scanBtn" type="submit"
+                        class="w-full bg-blue-500 py-3 sm:py-3.5 rounded-lg font-semibold hover:bg-blue-600 transition flex justify-center items-center gap-2">
+                    Run AI Scan
+                </button>
+            </form>
+        </div>
+
+        <div class="bg-[#111827] p-6 rounded-2xl border border-gray-700 shadow-xl relative overflow-hidden">
+            <div class="flex justify-between items-center mb-2">
+                <div class="flex items-center gap-2 text-xs text-green-400">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    AI Live Intelligence Preview
+                </div>
+                <div class="text-[10px] text-gray-500">
+                    Updated: <span id="lastUpdated">--:--:--</span>
                 </div>
             </div>
 
-            <div id="tickerInput" class="space-y-2">
-                <label class="block text-sm text-gray-400 break-words">Select Asset</label>
-                <select name="ticker_input" id="tickerSelect" class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
-                    <option value="">Select Asset</option>
-                
-                    <optgroup label="Crypto" id="group-crypto">
-                        <option value="BTC">Bitcoin</option>
-                        <option value="ETH">Ethereum</option>
-                        <option value="BNB">BNB</option>
-                        <option value="XRP">XRP</option>
-                        <option value="ADA">ADA</option>
-                        <option value="DOGE">DOGE</option>
-                        <option value="SOL">SOL</option>
-                        <option value="MATIC">MATIC</option>
-                        <option value="DOT">DOT</option>
-                        <option value="LTC">LTC</option>
-                    </optgroup>
-                
-                    <optgroup label="Stocks (India)" id="group-stock">
-                        <option value="RELIANCE.NS">Reliance</option>
-                        <option value="TCS.NS">TCS</option>
-                        <option value="INFY.NS">Infosys</option>
-                        <option value="HDFCBANK.NS">HDFC Bank</option>
-                        <option value="ICICIBANK.NS">ICICI Bank</option>
-                    </optgroup>
-                </select>
-                <p class="text-xs text-gray-500 mt-1">
-                    Choose an asset for instant AI analysis
-                </p>
+            <div class="mb-2">
+                <p class="text-xs text-gray-500">Current Asset</p>
+                <p id="activeAsset" class="text-sm font-semibold text-blue-300">None Selected</p>
             </div>
 
-            <div id="csvInput" class="hidden space-y-2">
-                <label class="block text-sm text-gray-400 break-words">Upload CSV</label>
-                <input type="file" name="csv_file" id="id_csv_file" accept=".csv"
-                       class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2">
-                <p class="text-xs text-gray-500 mt-2">Upload price + volume CSV</p>
-            </div>
+            <h3 class="text-gray-400 mb-3">Instant Risk Preview</h3>
+            <div id="previewScore" class="text-3xl sm:text-5xl font-bold text-blue-400 mb-2 break-words">--</div>
+            <span id="previewBadge" class="inline-block mb-4 bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">
+                Awaiting Input
+            </span>
 
-            <div id="socialInput" class="hidden space-y-2">
-                <label class="block text-sm text-gray-400 break-words">Social Signal (Link or Text)</label>
-                <textarea name="social_link" id="id_social_link" placeholder="Paste Telegram/Reddit signal or link"
-                          class="w-full bg-[#0B1220] border border-gray-700 text-gray-300 rounded-lg px-3 py-2 min-h-[100px] sm:min-h-[120px]"></textarea>
-                <p class="text-xs text-gray-500">
-                    Example: Paste text from a Twitter or Reddit post
-                </p>
+            <div class="grid grid-cols-2 gap-3 text-sm text-gray-400 border-t border-gray-800 pt-4">
+                <div>
+                    <p>Certainty</p>
+                    <p id="momVal" class="text-white font-bold">-</p>
+                </div>
+                <div>
+                    <p>Anomaly Index</p>
+                    <p id="anoVal" class="text-white font-bold">-</p>
+                </div>
             </div>
-
-            <button id="scanBtn" type="submit"
-                    class="w-full bg-blue-500 py-3 rounded-lg font-semibold hover:bg-blue-600 transition flex justify-center items-center gap-2">
-                Run AI Scan
-            </button>
-        </form>
-    </div>
-
-    <div class="bg-[#111827] p-6 rounded-2xl border border-gray-700 shadow-xl relative overflow-hidden">
-        <div class="flex justify-between items-center mb-2">
-            <div class="flex items-center gap-2 text-xs text-green-400">
-                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                AI Live Intelligence Preview
+            
+            <div class="h-40 sm:h-48 mt-6 min-h-[160px]">
+                <canvas id="previewChart"></canvas>
             </div>
-            <div class="text-[10px] text-gray-500">
-                Updated: <span id="lastUpdated">--:--:--</span>
-            </div>
-        </div>
-
-        <div class="mb-2">
-            <p class="text-xs text-gray-500">Current Asset</p>
-            <p id="activeAsset" class="text-sm font-semibold text-blue-300">None Selected</p>
-        </div>
-
-        <h3 class="text-gray-400 mb-3">Instant Risk Preview</h3>
-        <div id="previewScore" class="text-4xl sm:text-5xl font-bold text-blue-400 mb-2">--</div>
-        <span id="previewBadge" class="inline-block mb-4 bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">
-            Awaiting Input
-        </span>
-
-        <div class="grid grid-cols-2 gap-3 text-sm text-gray-400 border-t border-gray-800 pt-4">
-            <div>
-                <p>Certainty</p>
-                <p id="momVal" class="text-white font-bold">-</p>
-            </div>
-            <div>
-                <p>Anomaly Index</p>
-                <p id="anoVal" class="text-white font-bold">-</p>
-            </div>
-        </div>
-        
-        <div class="h-40 sm:h-48 mt-6">
-            <canvas id="previewChart"></canvas>
         </div>
     </div>
 </section>
@@ -148,7 +167,6 @@
 
 {% block scripts %}
 <style>
-    /* Fix 3b: Touch-friendly tab buttons */
     .tab-btn {
         background: #020617;
         padding: 10px;
@@ -179,7 +197,6 @@
 </style>
 
 <script>
-// (JS logic kept intact - showing only Fix 5b: Chart.js Options update)
 const marketSelect = document.getElementById("marketSelect");
 const tickerSelect = document.getElementById("tickerSelect");
 const cryptoGroup = document.getElementById("group-crypto");
@@ -375,7 +392,6 @@ function updateChart() {
                 }]
             },
             options: {
-                // Fix 5b: Aspect ratio settings
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: { duration: 300 },

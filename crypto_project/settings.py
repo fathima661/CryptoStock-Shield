@@ -28,8 +28,15 @@ SECRET_KEY = 'django-insecure-o70ei_jfli()(fp*#5gg!3$+y3-6bhift$d=kks54et2t=+n0$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['cryptostock-shield.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    "cryptostock-shield.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://cryptostock-shield.onrender.com"
+]
 
 # Application definition
 
@@ -50,6 +57,7 @@ AUTH_USER_MODEL = 'crypto_app.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,8 +65,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'crypto_app.middleware.GlobalExceptionMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
 ]
+
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 ROOT_URLCONF = 'crypto_project.urls'
 
@@ -133,7 +144,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+LOGIN_URL = '/'
 
 
 
@@ -185,6 +196,7 @@ LOGGING = {
 }
 
 CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 
@@ -207,3 +219,14 @@ DEFAULT_FROM_EMAIL = "CryptoStock Shield"
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
