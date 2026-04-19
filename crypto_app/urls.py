@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('scan/', views.scan, name='scan'),
     path('backtest/', views.backtest_view, name='backtest'),
+    path("backtest/pdf/<int:run_id>/", views.download_backtest_pdf, name="backtest_pdf"),
     path('about/', views.about, name='about'),
     
     path("api/login/", views.login_view, name="login"),

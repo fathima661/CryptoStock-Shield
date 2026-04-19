@@ -6,6 +6,7 @@ import time
 import pandas as pd
 from functools import lru_cache
 from services.model_manager import choose_model
+
 try:
     from services.gnn_anomaly import compute_anomaly_score
 except ImportError:
@@ -23,7 +24,7 @@ FEATURE_PATH = os.path.join(BASE_DIR, "ml_models", "model_features.pkl")
 
 
 # ==========================================
-# SAFE VALUE
+# SAFE VALUE (stable version)
 # ==========================================
 def clean_value(val, default=0.0):
     try:
@@ -38,7 +39,7 @@ def clean_value(val, default=0.0):
 
 
 # ==========================================
-# LOAD MODEL (CACHED)
+# LOAD MODEL
 # ==========================================
 @lru_cache()
 def load_model():
@@ -51,7 +52,6 @@ def load_model():
     if os.path.exists(FEATURE_PATH):
         features = joblib.load(FEATURE_PATH)
     else:
-        logger.warning("⚠️ Feature list missing → fallback used")
         features = [
             "price",
             "volume",
@@ -66,7 +66,7 @@ def load_model():
 
 
 # ==========================================
-# 🎯 TIME WINDOW
+# TIME WINDOW
 # ==========================================
 def calculate_time_window(prob):
     if prob >= 0.85:
@@ -79,7 +79,7 @@ def calculate_time_window(prob):
 
 
 # ==========================================
-# 🎯 CONFIDENCE
+# CONFIDENCE (stable + bounded)
 # ==========================================
 def compute_confidence(model_prob, anomaly_score):
     model_prob = clean_value(model_prob, 0.5)
@@ -89,12 +89,11 @@ def compute_confidence(model_prob, anomaly_score):
     agreement = 1 - abs(model_prob - anomaly_score)
 
     confidence = (0.6 * base_conf) + (0.4 * agreement)
-    confidence = max(0.0, min(1.0, confidence))
-    return confidence
+    return max(0.0, min(1.0, confidence))
 
 
 # ==========================================
-# 🧠 EXPLANATION ENGINE
+# EXPLANATION (unchanged logic)
 # ==========================================
 def generate_explanation(features, model_prob, anomaly_score):
     reasons = []
@@ -117,19 +116,19 @@ def generate_explanation(features, model_prob, anomaly_score):
         importance["post_count"] = features["post_count"]
 
     if anomaly_score > 0.75:
-        reasons.append("Strong anomaly spike detected in recent trading behavior")
+        reasons.append("Strong anomaly spike detected")
     elif anomaly_score > 0.6:
-        reasons.append("Moderate anomaly detected in market structure")
+        reasons.append("Moderate anomaly detected")
     elif anomaly_score > 0.4:
-        reasons.append("Graph anomaly detection flagged irregular behavior")
+        reasons.append("Irregular behavior flagged")
 
     if not reasons:
         reasons.append("No strong abnormal signals detected")
 
     if model_prob > 0.75:
-        summary = "High probability of coordinated market manipulation"
+        summary = "High probability of manipulation"
     elif model_prob > 0.5:
-        summary = "Moderate suspicious activity detected"
+        summary = "Moderate suspicious activity"
     else:
         summary = "Market behavior appears normal"
 
@@ -141,31 +140,30 @@ def generate_explanation(features, model_prob, anomaly_score):
 
 
 # ==========================================
-# 🚀 MAIN FUNCTION
+# MAIN PREDICT FUNCTION (STABLE CORE)
 # ==========================================
 def predict_pump(input_data: dict):
     start_time = time.time()
     logger.info("🚀 Prediction started")
 
     try:
-        # =========================
-        # MODEL SELECTION
-        # =========================
         model_obj = choose_model()
-        if not model_obj:
-            logger.warning("No active ML model → using fallback mode")
-            model_obj = None
-
-        # =========================
-        # LOAD MODEL
-        # =========================
         model, feature_list = load_model()
 
         values = []
         feature_dict = {}
 
+        missing_features = []
+
+        # =========================
+        # FEATURE HANDLING (STABLE FIX)
+        # =========================
         for f in feature_list:
-            val = clean_value(input_data.get(f, 0))
+            val = clean_value(input_data.get(f, 0.0))
+
+            if val == 0.0 and f not in input_data:
+                missing_features.append(f)
+
             values.append(val)
             feature_dict[f] = val
 
@@ -175,46 +173,41 @@ def predict_pump(input_data: dict):
         # MODEL PREDICTION
         # =========================
         try:
-            model_prob = float(model.predict_proba(X)[0][1])
+            model_prob = model.predict_proba(X)[0][1]
             model_prob = clean_value(model_prob, 0.5)
-            model_prob = max(0.05, min(0.95, model_prob))
+            model_prob = np.clip(model_prob, 0.05, 0.95)
         except Exception:
             logger.exception("Model prediction failed")
             model_prob = 0.5
 
         # =========================
-        # ANOMALY DETECTION (GNN)
+        # ANOMALY DETECTION (NORMALIZED FIX)
         # =========================
+        sequence = input_data.get("sequence", [])
+
         try:
-            sequence = input_data.get("sequence", [])
-
-            if compute_anomaly_score is None:
-                anomaly_score = 0.0  # GNN disabled safely
-            elif not isinstance(sequence, list) or len(sequence) == 0:
-                anomaly_score = 0.0
-            else:
+            if compute_anomaly_score and isinstance(sequence, list) and sequence:
                 anomaly_score = compute_anomaly_score(sequence)
-
+            else:
+                anomaly_score = 0.0
         except Exception:
-            logger.exception("Anomaly failed")
             anomaly_score = 0.0
 
         anomaly_score = clean_value(anomaly_score, 0.0)
+        anomaly_score = np.clip(anomaly_score, 0.0, 1.0)  # CRITICAL FIX
+
         feature_dict["anomaly_score"] = anomaly_score
 
         # =========================
-        # FINAL FUSION
+        # FUSION (STABLE WEIGHTED MODEL)
         # =========================
-        risk_score = (0.7 * model_prob) + (0.3 * anomaly_score)
-
-        risk_score = clean_value(risk_score, 0.0)
-        risk_score = max(0.0, min(1.0, risk_score))
+        risk_score = (0.75 * model_prob) + (0.25 * anomaly_score)
+        risk_score = np.clip(risk_score, 0.0, 1.0)
 
         confidence = compute_confidence(model_prob, anomaly_score)
-        confidence = clean_value(confidence, 0.0)
 
         # =========================
-        # OUTPUT LOGIC
+        # OUTPUT
         # =========================
         is_manipulated = risk_score >= 0.7
         time_window = calculate_time_window(risk_score)
@@ -226,18 +219,18 @@ def predict_pump(input_data: dict):
         )
 
         # =========================
-        # MODEL TRACKING
+        # TRACKING SAFE
         # =========================
         if model_obj:
             try:
                 model_obj.total_predictions += 1
                 model_obj.save(update_fields=["total_predictions"])
             except Exception:
-                logger.warning("Model tracking failed")
+                pass
 
         latency = round(time.time() - start_time, 4)
 
-        logger.info(f"✅ Prediction done | Risk={risk_score:.3f} | Latency={latency}s")
+        logger.info(f"✅ Prediction done | Risk={risk_score:.3f}")
 
         return {
             "risk_score": round(risk_score, 4),
@@ -248,7 +241,8 @@ def predict_pump(input_data: dict):
             "model_used": str(model_obj.id) if model_obj else "fallback_model",
             "latency": latency,
             "explanation": explanation,
-            "model_probability": round(model_prob, 4)
+            "model_probability": round(model_prob, 4),
+            "missing_features": missing_features
         }
 
     except Exception:

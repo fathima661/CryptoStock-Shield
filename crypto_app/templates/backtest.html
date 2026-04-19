@@ -198,6 +198,24 @@
                     </div>
                 </div>
 
+                <!-- ADD BUTTON (ONLY UI ADDITION — no layout change) -->
+                {% if user.is_authenticated and result.id %}
+                    <a href="{% url 'backtest_pdf' result.id %}"
+                       class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-bold hover:bg-blue-500">
+                       ⬇ Download PDF Report
+                    </a>
+                {% else %}
+                    <button type="button"
+                        onclick="document.getElementById('loginMsg').classList.remove('hidden')"
+                        class="inline-block mt-4 px-4 py-2 bg-gray-600 text-white rounded-xl text-sm font-bold hover:bg-gray-500">
+                        🔒 Download PDF Report
+                    </button>
+
+                    <p id="loginMsg" class="hidden mt-2 text-sm text-red-400 font-semibold">
+                        Please login to download report.
+                    </p>
+                {% endif %}
+
             </div>
             {% else %}
             <div class="h-full min-h-[350px] sm:min-h-[500px] flex flex-col items-center justify-center glass rounded-3xl border border-dashed border-gray-700 p-12 text-center">

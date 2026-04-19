@@ -12,6 +12,9 @@ from datetime import timedelta
 import numpy as np
 import pandas as pd
 import yfinance as yf
+import matplotlib.pyplot as plt
+import io
+import base64
 
 # ==========================================
 # DJANGO IMPORTS
@@ -35,6 +38,12 @@ from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Image
+
+
+
 
  
 
@@ -1486,6 +1495,172 @@ def backtest_view(request):
         "metrics": metrics
     })
 
+def download_backtest_pdf(request, run_id):
+    run = BacktestRun.objects.get(id=run_id, user=request.user)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="backtest_{run.asset.symbol}.pdf"'
+
+    doc = SimpleDocTemplate(response)
+    styles = getSampleStyleSheet()
+    elements = []
+
+    # =========================
+    # TITLE
+    # =========================
+    elements.append(Paragraph("Backtest Report (AI Strategy Analysis)", styles['Title']))
+    elements.append(Spacer(1, 12))
+
+    # =========================
+    # BASIC INFO
+    # =========================
+    data = [
+        ["Asset", run.asset.symbol],
+        ["Start Date", str(run.start_date)],
+        ["End Date", str(run.end_date)],
+        ["Accuracy", f"{run.accuracy_score:.2f}%"],
+        ["Anomalies", str(run.total_anomalies_detected)],
+    ]
+
+    table = Table(data)
+    table.setStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+    ])
+
+    elements.append(table)
+    elements.append(Spacer(1, 20))
+
+    # =========================
+    # EXTRACT SIMULATION DATA
+    # =========================
+    sim = run.simulation_results or {}
+
+    prices = sim.get("prices", [])
+    risk_scores = sim.get("risk_scores", [])
+    labels = sim.get("labels", [])
+
+    entry_price = None
+    trades = 0
+    wins = 0
+
+    pnl_curve = []
+
+    equity = 1000  # starting capital
+    equity_curve = [equity]
+
+    position = 0  # 0 = no position, 1 = holding
+
+    # =========================
+    # STRATEGY SIMULATION
+    # =========================
+    for i in range(len(prices)):
+        price = prices[i]
+        risk = risk_scores[i]
+
+        # BUY
+        if risk < 30 and position == 0:
+            entry_price = price
+            position = 1
+
+        # SELL
+        elif risk > 70 and position == 1:
+            pnl = price - entry_price
+            pnl_pct = pnl / max(entry_price, 1e-9)
+
+            equity *= (1 + pnl_pct)
+
+            pnl_curve.append(pnl)
+
+            trades += 1
+            if pnl > 0:
+                wins += 1
+
+            position = 0
+
+        equity_curve.append(equity)
+
+    win_rate = (wins / trades * 100) if trades > 0 else 0
+    total_pnl = sum(pnl_curve) if pnl_curve else 0
+
+    # =========================
+    # PERFORMANCE TABLE
+    # =========================
+    elements.append(Paragraph("Strategy Performance", styles['Heading2']))
+    elements.append(Spacer(1, 8))
+
+    perf_data = [
+        ["Total Trades", str(trades)],
+        ["Winning Trades", str(wins)],
+        ["Win Rate", f"{win_rate:.2f}%"],
+        ["Total PnL", f"{total_pnl:.2f}"],
+    ]
+
+    perf_table = Table(perf_data)
+    perf_table.setStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+    ])
+
+    elements.append(perf_table)
+    elements.append(Spacer(1, 20))
+
+    # =========================
+    # PRICE + RISK CHART
+    # =========================
+    plt.figure(figsize=(8, 4))
+    plt.plot(prices, label="Price", color="blue")
+    plt.plot(risk_scores, label="Risk", color="red")
+    plt.title("Backtest Simulation (Price vs Risk)")
+    plt.legend()
+
+    buffer1 = io.BytesIO()
+    plt.savefig(buffer1, format='png')
+    buffer1.seek(0)
+    plt.close()
+
+    elements.append(Image(buffer1, width=400, height=200))
+    elements.append(Spacer(1, 10))
+
+    # =========================
+    # EQUITY GROWTH CURVE (NEW)
+    # =========================
+    plt.figure(figsize=(8, 4))
+    plt.plot(equity_curve, label="Equity Curve", color="green")
+    plt.title("Equity Growth Curve")
+    plt.legend()
+
+    buffer2 = io.BytesIO()
+    plt.savefig(buffer2, format='png')
+    buffer2.seek(0)
+    plt.close()
+
+    elements.append(Image(buffer2, width=400, height=200))
+    elements.append(Spacer(1, 10))
+
+    # =========================
+    # FINAL SUMMARY
+    # =========================
+    summary = f"""
+    Simulation Summary:
+    - Total Trades: {trades}
+    - Win Rate: {win_rate:.2f}%
+    - Total PnL: {total_pnl:.2f}
+    - Final Equity: {equity:.2f}
+    - Data Points: {len(prices)}
+    """
+
+    elements.append(Paragraph("Final Summary", styles['Heading2']))
+    elements.append(Spacer(1, 6))
+    elements.append(Paragraph(summary.replace("\n", "<br/>"), styles['Normal']))
+
+    # =========================
+    # BUILD PDF
+    # =========================
+    doc.build(elements)
+    return response
 #-------------------------------------------------------ADMIN---------------------------------------------------
 
 from functools import wraps
