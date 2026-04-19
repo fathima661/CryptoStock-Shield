@@ -148,8 +148,6 @@ LOGIN_URL = '/'
 
 
 
-import os
-
 LOG_DIR = BASE_DIR / "logs"
 os.makedirs(LOG_DIR, exist_ok=True)
 
@@ -195,8 +193,10 @@ LOGGING = {
     },
 }
 
-CELERY_BROKER_URL = os.environ.get("REDIS_URL")
-CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL")
+
+REDIS_URL = os.environ.get("REDIS_URL")
+CELERY_BROKER_URL = REDIS_URL if REDIS_URL else "memory://"
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 
@@ -220,7 +220,7 @@ DEFAULT_FROM_EMAIL = "CryptoStock Shield"
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-REDIS_URL = os.environ.get("REDIS_URL")
+
 if REDIS_URL:
     CACHES = {
         "default": {
