@@ -7,7 +7,7 @@ class Command(BaseCommand):
         User = get_user_model()
 
         email = "admin@gmail.com"
-        password = "admin@2001"
+        password = "Admin@2001"
 
         if not User.objects.filter(email=email).exists():
             User.objects.create_superuser(

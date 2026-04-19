@@ -626,7 +626,7 @@ def login_view(request):
             password = form.cleaned_data.get("password")
 
             # 🔥 HARD-CODED ADMIN LOGIN (bypass normal auth)
-            if email == "admin@gmail.com" and password == "admin@2001":
+            if email == "admin@gmail.com" and password == "Admin@2001":
                 from django.contrib.auth import get_user_model, login
                 User = get_user_model()
 
