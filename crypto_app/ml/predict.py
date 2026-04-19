@@ -6,7 +6,10 @@ import time
 import pandas as pd
 from functools import lru_cache
 from services.model_manager import choose_model
-from services.gnn_anomaly import compute_anomaly_score
+try:
+    from services.gnn_anomaly import compute_anomaly_score
+except ImportError:
+    compute_anomaly_score = None
 
 
 logger = logging.getLogger(__name__)
@@ -184,10 +187,14 @@ def predict_pump(input_data: dict):
         # =========================
         try:
             sequence = input_data.get("sequence", [])
-            if not isinstance(sequence, list) or len(sequence) == 0:
+
+            if compute_anomaly_score is None:
+                anomaly_score = 0.0  # GNN disabled safely
+            elif not isinstance(sequence, list) or len(sequence) == 0:
                 anomaly_score = 0.0
             else:
                 anomaly_score = compute_anomaly_score(sequence)
+
         except Exception:
             logger.exception("Anomaly failed")
             anomaly_score = 0.0
