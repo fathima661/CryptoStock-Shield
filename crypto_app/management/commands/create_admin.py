@@ -1,3 +1,4 @@
+'''
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 
@@ -16,3 +17,4 @@ class Command(BaseCommand):
             self.stdout.write("Admin created")
         else:
             self.stdout.write("Admin already exists")
+'''
