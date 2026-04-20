@@ -79,7 +79,8 @@
                 <form method="POST" action="{% url 'delete_user' u.id %}">
                     {% csrf_token %}
                     <button type="submit"
-                            class="bg-red-500 w-full text-white py-2 rounded text-xs">
+                            class="bg-red-500 w-full text-white py-2 rounded text-xs"
+                            onclick="return confirm('Delete this user?')">
                         Delete
                     </button>
                 </form>
