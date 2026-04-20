@@ -205,12 +205,7 @@
                 <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 text-sm shadow-lg glow">
                     Start Scan
                 </a>
-                {% if user.is_superuser %}
-                   <a href="{% url 'admin_dashboard' %}" 
-                       class="bg-yellow-500 px-4 py-2 rounded-lg hover:bg-yellow-600 text-sm shadow-lg text-black">
-                        Admin Panel
-                    </a>
-                {% endif %}
+                
             </div>
 
             <div class="flex items-center gap-3 relative">
@@ -222,14 +217,7 @@
                         </div>
                     </button>
 
-                    <div id="profileMenu" class="hidden absolute right-0 mt-3 w-48 bg-[#111827] border border-gray-700 rounded-xl shadow-lg overflow-hidden z-50">
-                        <div class="px-4 py-3 border-b border-gray-700 text-sm text-gray-400">
-                            {{ user.email }}
-                        </div>
-                        <a href="{% url 'profile' %}" class="block px-4 py-2 hover:bg-gray-800 text-sm">Profile</a>
-                        <a href="{% url 'history' %}" class="block px-4 py-2 hover:bg-gray-800 text-sm">History</a>
-                        <a href="{% url 'logout' %}" class="block px-4 py-2 text-red-400 hover:bg-gray-800 text-sm">Logout</a>
-                    </div>
+                    
                 </div>
                 {% else %}
                 <button onclick="openAuth(); showLogin();" class="text-gray-300 hover:text-white transition">Login</button>
@@ -253,9 +241,6 @@
         <a href="#about" class="block py-2">About</a>
         <a href="{% url 'scan' %}" class="bg-blue-500 px-4 py-2 rounded-lg inline-block w-fit">Start Scan</a>
 
-        {% if user.is_superuser %}
-            <a href="{% url 'admin_dashboard' %}" class="block text-yellow-400">Admin Panel</a>
-        {% endif %}
     </div>
 
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
@@ -851,15 +836,21 @@
             </div>
         </div>
         <div class="mt-auto w-full p-5 border-t border-gray-800 space-y-2">
+            <a href="{% url 'user_dashboard' %}" 
+               class="block w-full text-center bg-blue-500 hover:bg-blue-600 py-2 rounded-lg text-sm">
+                User Dashboard
+            </a>
             {% if user.is_superuser %}
                 <a href="{% url 'admin_dashboard' %}" 
                    class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 py-2 rounded-lg text-sm text-black">
                     Admin Dashboard
                 </a>
             {% endif %}
+            {% if user.is_authenticated and not user.is_superuser %}
             <button onclick="deleteAccount()" class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">
                 Delete Account
             </button>
+            {% endif %}
             <form method="POST" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-sm text-white">

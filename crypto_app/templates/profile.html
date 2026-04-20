@@ -6,26 +6,9 @@
 
 <section class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
 
-    <div class="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
-
-        <div>
-            <h2 class="text-2xl sm:text-3xl font-bold">Your Dashboard</h2>
-            <p class="text-gray-400">Track scans, alerts and activity</p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-
-            <button onclick="deleteAccount()"
-                class="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
-                Delete Account
-            </button>
-
-            <a href="{% url 'logout' %}"
-                class="w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
-                Logout
-            </a>
-
-        </div>
+    <div class="mb-6">
+        <h2 class="text-2xl sm:text-3xl font-bold">Your Dashboard</h2>
+        <p class="text-gray-400">Track scans, alerts and activity</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">

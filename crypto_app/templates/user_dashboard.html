@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | CryptoStock Shield{% endblock %}
+
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+
+    <!-- HEADER -->
+    <div class="mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold">Dashboard</h2>
+        <p class="text-gray-400 text-sm sm:text-base">Your activity overview</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        <div class="glass p-5 rounded-xl border border-gray-700">
+            <p class="text-xs text-gray-400">Total Scans</p>
+            <h3 class="text-2xl font-bold">{{ total_scans }}</h3>
+        </div>
+        <div class="glass p-5 rounded-xl border border-gray-700">
+            <p class="text-xs text-gray-400">Completed</p>
+            <h3 class="text-2xl font-bold text-green-400">{{ completed_scans }}</h3>
+        </div>
+        <div class="glass p-5 rounded-xl border border-gray-700">
+            <p class="text-xs text-gray-400">Processing</p>
+            <h3 class="text-2xl font-bold text-yellow-400">{{ pending_scans }}</h3>
+        </div>
+    </div>
+
+    <!-- ALERTS -->
+    <div class="mb-10">
+        <h3 class="text-lg font-semibold mb-4">Recent Alerts</h3>
+
+        <div class="space-y-3">
+            {% for alert in alerts %}
+            <div class="glass p-4 rounded-lg border border-gray-700 flex justify-between items-center">
+                <p class="text-sm truncate">{{ alert.message|default:"No message" }}</p>
+                <span class="text-xs text-red-400">{{ alert.risk_level|default:"-" }}</span>
+            </div>
+            {% empty %}
+            <p class="text-gray-500 text-sm">No alerts</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- SCANS -->
+    <div class="mb-10">
+        <h3 class="text-lg font-semibold mb-4">Recent Scans</h3>
+
+        <div class="space-y-3">
+            {% for scan in recent_scans %}
+            <div class="glass p-4 rounded-lg border border-gray-700 flex justify-between items-center">
+                <div>
+                    <p class="text-sm font-medium">{{ scan.asset|default:"Unknown" }}</p>
+                    <p class="text-xs text-gray-500">{{ scan.created_at|date:"M d, H:i" }}</p>
+                </div>
+
+                <span class="text-xs px-3 py-1 rounded
+                    {% if scan.status == 'completed' %}bg-green-500/10 text-green-400
+                    {% elif scan.status == 'processing' %}bg-yellow-500/10 text-yellow-400
+                    {% else %}bg-gray-500/10 text-gray-400{% endif %}">
+                    {{ scan.status|title }}
+                </span>
+            </div>
+            {% empty %}
+            <p class="text-gray-500 text-sm">No scans</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- SAVED -->
+    <div>
+        <h3 class="text-lg font-semibold mb-4">Saved Predictions</h3>
+
+        <div class="space-y-3">
+            {% for item in saved %}
+            <div class="glass p-4 rounded-lg border border-gray-700 flex justify-between items-center">
+                <p class="text-sm">
+                    Risk: {{ item.prediction.risk_score|default:"-" }}
+                </p>
+                <span class="text-xs text-gray-400">
+                    {{ item.saved_at|date:"M d, H:i" }}
+                </span>
+            </div>
+            {% empty %}
+            <p class="text-gray-500 text-sm">No saved items</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+{% endblock %}

