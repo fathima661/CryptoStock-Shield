@@ -130,9 +130,10 @@ function getFiltered(list, selector) {
 
 function render() {
 
-    const filtered = getFiltered(rows, ".email-cell");
+    const filteredRows = getFiltered(rows, ".email-cell");
+    const filteredCards = getFiltered(cards, ".email-cell");
 
-    const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+    const totalPages = Math.max(1, Math.ceil(filteredRows.length / perPage));
 
     if (currentPage > totalPages) currentPage = 1;
 
@@ -143,8 +144,14 @@ function render() {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
-    filtered.slice(start, end).forEach(r => {
+    // show desktop rows
+    filteredRows.slice(start, end).forEach(r => {
         r.style.display = "";
+    });
+
+    // show mobile cards
+    filteredCards.slice(start, end).forEach(c => {
+        c.style.display = "";
     });
 
     document.getElementById("pageInfo").innerText =

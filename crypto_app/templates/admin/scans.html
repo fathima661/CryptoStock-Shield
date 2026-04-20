@@ -100,6 +100,33 @@
 
     </div>
 
+    <!-- MOBILE -->
+    <div class="md:hidden space-y-3">
+
+        {% for scan in scans %}
+        <div class="bg-[#111827] border border-gray-800 rounded-xl p-4 scan-card">
+
+            <p class="text-white text-sm break-all user-cell">
+                {{ scan.user.email }}
+            </p>
+
+            <p class="text-xs text-gray-400 mt-1">
+                Asset: <span class="asset-cell">{{ scan.asset.symbol }}</span>
+            </p>
+
+            <p class="text-xs text-gray-400">
+                Status: <span class="status-cell">{{ scan.status }}</span>
+            </p>
+
+            <p class="text-xs text-gray-500 mt-1">
+                {{ scan.created_at }}
+            </p>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
     <!-- PAGINATION -->
     <div class="flex justify-center items-center gap-3 mt-6 text-sm text-white">
 
@@ -125,6 +152,7 @@ const filterAsset = document.getElementById("filterAsset");
 const filterStatus = document.getElementById("filterStatus");
 
 const rows = Array.from(document.querySelectorAll(".scan-row"));
+const cards = Array.from(document.querySelectorAll(".scan-card"));
 
 /* =========================
    UNIQUE USER DROPDOWN
@@ -148,30 +176,34 @@ rows.forEach(row => {
 let currentPage = 1;
 const perPage = 10;
 
-function getFilteredRows() {
+function matches(item) {
+    const user = item.querySelector(".user-cell").innerText.toLowerCase();
+    const asset = item.querySelector(".asset-cell").innerText.toLowerCase();
+    const status = item.querySelector(".status-cell").innerText.toLowerCase();
 
     const userVal = searchUser.value.toLowerCase();
     const assetVal = filterAsset.value.toLowerCase();
     const statusVal = filterStatus.value.toLowerCase();
 
-    return rows.filter(row => {
+    const matchUser = !userVal || user.includes(userVal);
 
-        const user = row.querySelector(".user-cell").innerText.toLowerCase();
-        const asset = row.querySelector(".asset-cell").innerText.toLowerCase();
-        const status = row.querySelector(".status-cell").innerText.toLowerCase();
+    const matchAsset =
+        !assetVal ||
+        asset.includes(assetVal) ||
+        (assetVal === "crypto" && ["btc","eth","bnb","xrp","ada","doge","sol","matic","dot","ltc"].some(c => asset.includes(c))) ||
+        (assetVal === "stock" && asset.includes(".ns"));
 
-        const matchUser = !userVal || user.includes(userVal);
+    const matchStatus = !statusVal || status.includes(statusVal);
 
-        const matchAsset =
-            !assetVal ||
-            asset.includes(assetVal) ||
-            (assetVal === "crypto" && ["btc","eth","bnb","xrp","ada","doge","sol","matic","dot","ltc"].some(c => asset.includes(c))) ||
-            (assetVal === "stock" && asset.includes(".ns"));
+    return matchUser && matchAsset && matchStatus;
+}
 
-        const matchStatus = !statusVal || status.includes(statusVal);
+function getFilteredRows() {
+    return rows.filter(matches);
+}
 
-        return matchUser && matchAsset && matchStatus;
-    });
+function getFilteredCards() {
+    return cards.filter(matches);
 }
 
 /* =========================
@@ -179,19 +211,21 @@ function getFilteredRows() {
 ========================= */
 function render() {
 
-    const filtered = getFilteredRows();
-    const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+    const filteredRows = getFilteredRows();
+    const filteredCards = getFilteredCards();
 
-    if (currentPage > totalPages) currentPage = 1;
+    const totalPages = Math.max(1, Math.ceil(filteredRows.length / perPage));
+
+    if (currentPage > totalPages) currentPage = totalPages;
 
     rows.forEach(r => r.style.display = "none");
+    cards.forEach(c => c.style.display = "none");
 
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
-    filtered.slice(start, end).forEach(r => {
-        r.style.display = "";
-    });
+    filteredRows.slice(start, end).forEach(r => r.style.display = "");
+    filteredCards.slice(start, end).forEach(c => c.style.display = "");
 
     document.getElementById("pageInfo").innerText =
         `${currentPage} / ${totalPages}`;
